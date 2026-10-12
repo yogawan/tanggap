@@ -60,9 +60,9 @@ export default function AboutPage() {
         </h1>
         <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted">
           TanggapAI adalah platform AI Agent untuk membantu operator logistik
-          menangani exception operasional — dari shipment yang terlambat
-          hingga kendaraan yang bermasalah — melalui proses investigasi,
-          perencanaan, eksekusi, dan verifikasi yang terstruktur.
+          menangani exception operasional — dari shipment yang terlambat hingga
+          kendaraan yang bermasalah — melalui proses investigasi, perencanaan,
+          eksekusi, dan verifikasi yang terstruktur.
         </p>
       </section>
 
@@ -74,10 +74,10 @@ export default function AboutPage() {
             </h2>
             <p className="mt-4 leading-7 text-muted">
               Tanggap adalah AI Agent utama TanggapAI sekaligus maskot yang
-              merepresentasikan karakter sigap dan responsif. Tanggap bekerja
-              di atas sistem operasional yang sudah ada melalui API dan tools
-              yang diizinkan, dengan operator tetap memegang kendali atas
-              tindakan yang berisiko.
+              merepresentasikan karakter sigap dan responsif. Tanggap bekerja di
+              atas sistem operasional yang sudah ada melalui API dan tools yang
+              diizinkan, dengan operator tetap memegang kendali atas tindakan
+              yang berisiko.
             </p>
           </div>
 

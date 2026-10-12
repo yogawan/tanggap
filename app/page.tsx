@@ -343,7 +343,10 @@ function Hero() {
     <section className="bg-background">
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="text-center">
-          <p className="text-xl font-medium text-muted sm:text-2xl">
+          <div className="flex justify-center">
+            <WaletMascot size="md" />
+          </div>
+          <p className="mt-2 text-xl font-medium text-muted sm:text-2xl">
             {greeting}, aku Tanggap
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-[-.02em] text-foreground sm:text-4xl">
@@ -616,12 +619,8 @@ function HowItWorks() {
                 {step.number}
               </span>
               <div>
-                <h3 className="font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-sm leading-6 text-muted">
-                  {step.copy}
-                </p>
+                <h3 className="font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-1 text-sm leading-6 text-muted">{step.copy}</p>
               </div>
             </li>
           ))}
