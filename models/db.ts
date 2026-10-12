@@ -31,6 +31,14 @@ export default async function dbConnect() {
     cached.promise = mongoose.connect(MONGODB_URI);
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    // Don't cache a rejected promise — let the next call retry the connection
+    // instead of replaying the same failure forever.
+    cached.promise = null;
+    throw err;
+  }
+
   return cached.conn;
 }

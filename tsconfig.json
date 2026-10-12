@@ -30,5 +30,13 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "app/_referensi-ui/**",
+    "components/site-header.tsx",
+    "components/site-footer.tsx",
+    "components/splash-screen.tsx",
+    "components/section-intro.tsx",
+    "components/ui/button.tsx"
+  ]
 }
