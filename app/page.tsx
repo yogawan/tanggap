@@ -3,7 +3,6 @@
 
 import {
   ArrowRight,
-  Boxes,
   ChevronDown,
   CircleCheck,
   ClipboardList,
@@ -12,10 +11,8 @@ import {
   Route,
   Search,
   SendHorizontal,
-  ShieldAlert,
   ShieldCheck,
   Truck,
-  Wrench,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,19 +38,19 @@ const textFadeOpacity = [
 const problems = [
   {
     number: "01",
-    icon: Boxes,
+    image: "/Data Terpisah.png",
     title: "Data Terpisah",
     copy: "Informasi shipment, kendaraan, driver, dan rute tersebar di berbagai sistem.",
   },
   {
     number: "02",
-    icon: Wrench,
+    image: "/Recovery Manual.png",
     title: "Recovery Manual",
     copy: "Investigasi dan koordinasi tindakan membutuhkan waktu serta intervensi operator.",
   },
   {
     number: "03",
-    icon: ShieldAlert,
+    image: "/Verifikasi Terlewat.png",
     title: "Verifikasi Terlewat",
     copy: "Tindakan yang berhasil dikirim belum tentu berarti masalah sudah terselesaikan.",
   },
@@ -62,26 +59,31 @@ const problems = [
 const capabilities = [
   {
     number: "01",
+    image: "/Investigate.png",
     title: "Investigate",
     copy: "Mengumpulkan data shipment, kendaraan, driver, dan exception untuk memahami kondisi sebenarnya.",
   },
   {
     number: "02",
+    image: "/Reason.png",
     title: "Reason",
     copy: "Menganalisis informasi dan mengidentifikasi penyebab masalah berdasarkan data yang tersedia.",
   },
   {
     number: "03",
+    image: "/Plan.png",
     title: "Plan",
     copy: "Menyusun recovery plan berdasarkan resource, ketersediaan, dan aturan operasional.",
   },
   {
     number: "04",
+    image: "/Execute.png",
     title: "Execute",
     copy: "Menjalankan tindakan melalui tools yang tersedia dan diizinkan.",
   },
   {
     number: "05",
+    image: "/Verify.png",
     title: "Verify",
     copy: "Memeriksa hasil eksekusi dan memastikan status sesuai kondisi aktual.",
   },
@@ -437,9 +439,12 @@ function Problem() {
               <span className="text-xs font-bold text-primary">
                 {problem.number}
               </span>
-              <problem.icon
-                className="h-8 w-8 text-primary"
-                strokeWidth={1.5}
+              <Image
+                src={problem.image}
+                alt={problem.title}
+                width={56}
+                height={56}
+                className="h-14 w-14 object-contain"
               />
             </div>
             <h3 className="mt-9 text-lg font-semibold tracking-[-.02em] text-foreground">
@@ -555,9 +560,18 @@ function Capabilities() {
               key={capability.number}
               className="relative rounded-2xl border border-border bg-background p-6"
             >
-              <span className="text-4xl font-bold tracking-[-.08em] text-border">
-                {capability.number}
-              </span>
+              <div className="flex items-start justify-between">
+                <span className="text-4xl font-bold tracking-[-.08em] text-border">
+                  {capability.number}
+                </span>
+                <Image
+                  src={capability.image}
+                  alt={capability.title}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 object-contain"
+                />
+              </div>
               <h3 className="mt-5 text-lg font-semibold text-foreground">
                 {capability.title}
               </h3>
