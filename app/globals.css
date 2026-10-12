@@ -1,26 +1,49 @@
 @import "tailwindcss";
+/* vendored: @tailwindcss/postcss can't resolve tw-animate-css's package.json
+   "style" export condition, so we import the file this package ships. */
+@import "./tw-animate.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  --color-primary-light: #ccfbf1;
+
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
+
+  --color-risk-low: var(--color-success);
+  --color-risk-medium: var(--color-warning);
+  --color-risk-high: #ea580c;
+  --color-risk-critical: var(--color-danger);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+
+  --shadow-card: 0 1px 3px rgb(15 23 42 / 0.06);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+code,
+.font-mono {
+  font-family: var(--font-mono);
 }
