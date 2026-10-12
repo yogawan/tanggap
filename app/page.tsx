@@ -498,7 +498,7 @@ function Solution() {
               </span>
               <span className="text-primary-light">↓</span>
               <span className="max-w-xs rounded-lg border border-primary-light/40 bg-primary-light/10 px-4 py-2 text-[11px] font-bold tracking-wide text-primary-light">
-                INVESTIGATE - REASON - PLAN - EXECUTE - VERIFY
+                Investigate - Reason - Plan - Execute - Verify
               </span>
               <span className="text-primary-light">↓</span>
               <span className="rounded-lg border border-white/15 bg-white/10 px-4 py-2">
@@ -609,14 +609,20 @@ function HowItWorks() {
           </p>
         </div>
 
-        <ol className="space-y-6 border-l-2 border-border pl-8">
+        <ol className="space-y-6">
           {recoverySteps.map((step) => (
-            <li key={step.number} className="relative">
-              <span className="absolute -left-[2.45rem] flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+            <li key={step.number} className="flex items-start gap-4">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
                 {step.number}
               </span>
-              <h3 className="font-semibold text-foreground">{step.title}</h3>
-              <p className="mt-1 text-sm leading-6 text-muted">{step.copy}</p>
+              <div>
+                <h3 className="font-semibold text-foreground">
+                  {step.title}
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-muted">
+                  {step.copy}
+                </p>
+              </div>
             </li>
           ))}
         </ol>
