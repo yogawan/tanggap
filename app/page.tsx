@@ -340,8 +340,12 @@ function Hero() {
   const greeting = useTimeGreeting();
 
   return (
-    <section className="bg-background">
-      <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
+    <section className="relative overflow-hidden bg-background">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-15"
+      />
+      <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="text-center">
           <div className="flex justify-center">
             <WaletMascot size="md" />
