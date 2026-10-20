@@ -18,7 +18,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { FormEvent, ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTimeGreeting } from "@/lib/useTimeGreeting";
 
 const examplePrompts = [
   { icon: Search, text: "Investigasi shipment SH-8821 yang terlambat." },
@@ -330,20 +331,6 @@ function Navbar() {
       </div>
     </header>
   );
-}
-
-function useTimeGreeting() {
-  const [greeting, setGreeting] = useState("Halo");
-
-  useEffect(() => {
-    const hour = new Date().getHours();
-    if (hour < 10) setGreeting("Selamat Pagi");
-    else if (hour < 15) setGreeting("Selamat Siang");
-    else if (hour < 18) setGreeting("Selamat Sore");
-    else setGreeting("Selamat Malam");
-  }, []);
-
-  return greeting;
 }
 
 function Hero() {
