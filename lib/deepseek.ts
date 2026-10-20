@@ -17,7 +17,9 @@ type ToolMeta = Pick<
   "name" | "description" | "inputSchema"
 >;
 
-export function toolsToDeepSeekFormat(tools: ToolMeta[]): ChatCompletionTool[] {
+// Standard OpenAI function-calling tool schema — works for any
+// OpenAI-compatible provider (DeepSeek, Groq, ...), not just DeepSeek.
+export function toolsToOpenAIFormat(tools: ToolMeta[]): ChatCompletionTool[] {
   return tools.map((tool) => {
     const schema = z.toJSONSchema(tool.inputSchema) as Record<string, unknown>;
     delete schema.$schema;

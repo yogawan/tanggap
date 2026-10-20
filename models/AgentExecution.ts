@@ -1,5 +1,14 @@
 import mongoose, { type Document, Schema } from "mongoose";
 
+export interface IPendingApproval {
+  tool: string;
+  toolCallId: string;
+  input: unknown;
+  messages: unknown[];
+  provider: string;
+  model: string;
+}
+
 export interface IAgentExecution extends Document {
   task: string;
   shipmentId?: mongoose.Types.ObjectId;
@@ -12,6 +21,7 @@ export interface IAgentExecution extends Document {
     message?: string;
     timestamp: Date;
   }[];
+  pendingApproval?: IPendingApproval | null;
   startedAt: Date;
   completedAt?: Date;
 }
@@ -50,6 +60,11 @@ const AgentExecutionSchema = new Schema(
         },
       },
     ],
+
+    pendingApproval: {
+      type: Schema.Types.Mixed,
+      default: null,
+    },
 
     startedAt: {
       type: Date,

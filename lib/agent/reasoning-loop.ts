@@ -8,8 +8,9 @@ import {
   DEEPSEEK_MODEL,
   deepseek,
   isInsufficientBalanceError,
-  toolsToDeepSeekFormat,
+  toolsToOpenAIFormat,
 } from "../deepseek";
+import { GROQ_MODEL, groq } from "../groq";
 import { AgentExecutionManager } from "./execution-manager";
 import { buildSystemPrompt } from "./system-prompt";
 import { getTool, listTools } from "./tool-registry";
@@ -31,8 +32,38 @@ export type CreateCompletionFn = (args: {
   tools: ChatCompletionTool[];
 }) => Promise<ChatCompletion>;
 
-const defaultCreateCompletion: CreateCompletionFn = (args) =>
-  deepseek.chat.completions.create({ ...args, stream: false });
+type Provider = {
+  key: string;
+  name: string;
+  model: string;
+  createCompletion: CreateCompletionFn;
+};
+
+// DeepSeek is the documented primary provider (PRD §8). Groq is a free
+// OpenAI-compatible fallback for dev/testing while DeepSeek's balance is
+// $0 — opt in with LLM_PROVIDER=groq; default stays DeepSeek.
+const providers: Record<string, Provider> = {
+  deepseek: {
+    key: "deepseek",
+    name: "DeepSeek",
+    model: DEEPSEEK_MODEL,
+    createCompletion: (args) =>
+      deepseek.chat.completions.create({ ...args, stream: false }),
+  },
+  groq: {
+    key: "groq",
+    name: "Groq",
+    model: GROQ_MODEL,
+    createCompletion: (args) =>
+      groq.chat.completions.create({ ...args, stream: false }),
+  },
+};
+
+function activeProvider(): Provider {
+  return (
+    providers[process.env.LLM_PROVIDER ?? "deepseek"] ?? providers.deepseek
+  );
+}
 
 function safeParseArgs(raw: string | undefined): unknown {
   if (!raw) return {};
@@ -43,44 +74,44 @@ function safeParseArgs(raw: string | undefined): unknown {
   }
 }
 
+type LoopParams = {
+  manager: AgentExecutionManager;
+  provider: Provider;
+  model: string;
+  createCompletion: CreateCompletionFn;
+  messages: ChatCompletionMessageParam[];
+  maxSteps: number;
+};
+
 /**
- * Drives one task through DeepSeek's tool-calling loop: send messages, run
- * whatever low-risk tools the model asks for, feed results back, repeat.
- * Pauses (without executing anything from that turn) the moment the model
- * requests a high-risk tool — Fase 7's approve/reject API resumes from there.
+ * Shared tool-calling loop used by both a fresh `runAgentTask` call and a
+ * resumed one (Fase 7): send messages, run whatever low-risk tools the model
+ * asks for, feed results back, repeat. Pauses and persists the conversation
+ * so far the moment the model requests a high-risk tool — `resumeAgentTask`
+ * continues from exactly that point once a human decides.
  */
-export async function runAgentTask(
-  userMessage: string,
-  options: { maxSteps?: number; createCompletion?: CreateCompletionFn } = {},
-): Promise<AgentTaskResult> {
-  const maxSteps = options.maxSteps ?? 12;
-  const createCompletion = options.createCompletion ?? defaultCreateCompletion;
-
-  const manager = new AgentExecutionManager();
-  await manager.start(userMessage);
-
-  const messages: ChatCompletionMessageParam[] = [
-    { role: "system", content: buildSystemPrompt() },
-    { role: "user", content: userMessage },
-  ];
-
-  const tools = toolsToDeepSeekFormat(listTools());
+async function runLoop({
+  manager,
+  provider,
+  model,
+  createCompletion,
+  messages,
+  maxSteps,
+}: LoopParams): Promise<AgentTaskResult> {
+  const tools = toolsToOpenAIFormat(listTools());
 
   for (let step = 0; step < maxSteps; step++) {
     let completion: ChatCompletion;
     try {
-      completion = await createCompletion({
-        model: DEEPSEEK_MODEL,
-        messages,
-        tools,
-      });
+      completion = await createCompletion({ model, messages, tools });
     } catch (err) {
-      const error = isInsufficientBalanceError(err)
-        ? "DeepSeek balance is insufficient. Top up at https://platform.deepseek.com and try again."
-        : err instanceof Error
-          ? err.message
-          : String(err);
-      await manager.logDecision(`DeepSeek call failed: ${error}`);
+      const error =
+        provider.name === "DeepSeek" && isInsufficientBalanceError(err)
+          ? "DeepSeek balance is insufficient. Top up at https://platform.deepseek.com and try again."
+          : err instanceof Error
+            ? err.message
+            : String(err);
+      await manager.logDecision(`${provider.name} call failed: ${error}`);
       await manager.complete("failed");
       return { status: "failed", executionId: manager.id, error };
     }
@@ -117,6 +148,14 @@ export async function runAgentTask(
       await manager.logDecision(
         `Proposing ${highRiskCall.function.name} with ${JSON.stringify(input)} — awaiting human approval.`,
       );
+      await manager.savePendingApproval({
+        tool: highRiskCall.function.name,
+        toolCallId: highRiskCall.id,
+        input,
+        messages,
+        provider: provider.key,
+        model,
+      });
       return {
         status: "pending_approval",
         executionId: manager.id,
@@ -145,4 +184,98 @@ export async function runAgentTask(
     executionId: manager.id,
     error: "Max steps exceeded without resolution",
   };
+}
+
+export async function runAgentTask(
+  userMessage: string,
+  options: {
+    maxSteps?: number;
+    createCompletion?: CreateCompletionFn;
+    model?: string;
+  } = {},
+): Promise<AgentTaskResult> {
+  const provider = activeProvider();
+  const manager = new AgentExecutionManager();
+  await manager.start(userMessage);
+
+  const messages: ChatCompletionMessageParam[] = [
+    { role: "system", content: buildSystemPrompt() },
+    { role: "user", content: userMessage },
+  ];
+
+  return runLoop({
+    manager,
+    provider,
+    model: options.model ?? provider.model,
+    createCompletion: options.createCompletion ?? provider.createCompletion,
+    messages,
+    maxSteps: options.maxSteps ?? 12,
+  });
+}
+
+/**
+ * Resumes an execution paused on `pending_approval`. Approve runs the
+ * proposed tool for real, through the same guardrail as everything else
+ * (just with `approved: true`); reject feeds back a synthetic failed result
+ * so the model sees what happened and can propose an alternative, same as
+ * any other tool failure.
+ */
+export async function resumeAgentTask(
+  executionId: string,
+  decision: { approved: boolean },
+  options: {
+    maxSteps?: number;
+    createCompletion?: CreateCompletionFn;
+  } = {},
+): Promise<AgentTaskResult> {
+  const manager = AgentExecutionManager.forExisting(executionId);
+  const pending = await manager.loadPendingApproval();
+
+  if (!pending) {
+    return {
+      status: "failed",
+      executionId,
+      error: "No pending approval found for this execution.",
+    };
+  }
+
+  await manager.clearPendingApproval();
+
+  let result:
+    | { success: false; error: string }
+    | Awaited<ReturnType<AgentExecutionManager["runTool"]>>;
+  if (decision.approved) {
+    result = await manager.runTool(pending.tool, pending.input, {
+      approved: true,
+    });
+  } else {
+    await manager.logDecision(
+      `Operator rejected ${pending.tool} with ${JSON.stringify(pending.input)}.`,
+    );
+    result = {
+      success: false,
+      error:
+        "Operator rejected this action. Do not retry the same action — propose an alternative or state that manual intervention is required.",
+    };
+  }
+
+  const toolMessage: ChatCompletionToolMessageParam = {
+    role: "tool",
+    tool_call_id: pending.toolCallId,
+    content: JSON.stringify(result),
+  };
+
+  const provider = providers[pending.provider] ?? providers.deepseek;
+
+  return runLoop({
+    manager,
+    provider,
+    model: pending.model,
+    createCompletion: options.createCompletion ?? provider.createCompletion,
+    messages: [
+      ...(pending.messages as ChatCompletionMessageParam[]),
+      toolMessage,
+    ],
+    maxSteps: options.maxSteps ?? 12,
+  });
 }

@@ -1,5 +1,7 @@
-import type mongoose from "mongoose";
-import AgentExecution from "../../models/AgentExecution";
+import mongoose from "mongoose";
+import AgentExecution, {
+  type IPendingApproval,
+} from "../../models/AgentExecution";
 import dbConnect from "../../models/db";
 import Shipment from "../../models/Shipment";
 import type { ToolResult } from "../tools/shared";
@@ -42,6 +44,35 @@ export class AgentExecutionManager {
     });
     this.executionId = doc._id;
     return doc._id.toString();
+  }
+
+  /** Attach to an already-started execution (Fase 7 resume path) instead of creating a new one. */
+  static forExisting(id: string): AgentExecutionManager {
+    const manager = new AgentExecutionManager();
+    manager.executionId = new mongoose.Types.ObjectId(id);
+    return manager;
+  }
+
+  async savePendingApproval(pending: IPendingApproval): Promise<void> {
+    await dbConnect();
+    await AgentExecution.findByIdAndUpdate(this.requireId(), {
+      pendingApproval: pending,
+    });
+  }
+
+  /** Returns null if the execution doesn't exist or has nothing pending. */
+  async loadPendingApproval(): Promise<IPendingApproval | null> {
+    await dbConnect();
+    const doc = await AgentExecution.findById(this.requireId())
+      .select("pendingApproval")
+      .lean<{ pendingApproval: IPendingApproval | null }>();
+    return doc?.pendingApproval ?? null;
+  }
+
+  async clearPendingApproval(): Promise<void> {
+    await AgentExecution.findByIdAndUpdate(this.requireId(), {
+      pendingApproval: null,
+    });
   }
 
   /** Call once the shipment this execution concerns is known (e.g. after the first getShipment call). */
