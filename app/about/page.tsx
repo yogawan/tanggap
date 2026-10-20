@@ -23,14 +23,14 @@ const values = [
 
 const team = [
   {
-    name: "Ali",
-    role: "Frontend Developer",
-    image: "/Ali as a Frontend Dev.png",
-  },
-  {
     name: "Lathif",
     role: "AI Developer",
     image: "/Lathif as a AI Dev.png",
+  },
+  {
+    name: "Ali",
+    role: "Frontend Developer",
+    image: "/Ali as a Frontend Dev.png",
   },
   {
     name: "Yogawan",
@@ -69,7 +69,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden text-center">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-15"
+          className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-5"
         />
         <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
           <p className="text-xs font-bold tracking-[.18em] text-primary">
