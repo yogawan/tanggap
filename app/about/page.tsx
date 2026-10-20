@@ -66,22 +66,28 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 lg:py-28">
-        <p className="text-xs font-bold tracking-[.18em] text-primary">
-          TENTANG KAMI
-        </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-[-.03em] text-foreground sm:text-4xl">
-          Masalah terjadi.{" "}
-          <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">
-            Tanggap tangani.
-          </span>
-        </h1>
-        <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted">
-          TanggapAI adalah platform AI Agent untuk membantu operator logistik
-          menangani exception operasional — dari shipment yang terlambat hingga
-          kendaraan yang bermasalah — melalui proses investigasi, perencanaan,
-          eksekusi, dan verifikasi yang terstruktur.
-        </p>
+      <section className="relative overflow-hidden text-center">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-15"
+        />
+        <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
+          <p className="text-xs font-bold tracking-[.18em] text-primary">
+            TENTANG KAMI
+          </p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-[-.03em] text-foreground sm:text-4xl">
+            Masalah terjadi.{" "}
+            <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">
+              Tanggap tangani.
+            </span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted">
+            TanggapAI adalah platform AI Agent untuk membantu operator logistik
+            menangani exception operasional — dari shipment yang terlambat
+            hingga kendaraan yang bermasalah — melalui proses investigasi,
+            perencanaan, eksekusi, dan verifikasi yang terstruktur.
+          </p>
+        </div>
       </section>
 
       <section className="border-y border-border bg-surface py-20 lg:py-28">
@@ -146,8 +152,8 @@ export default function AboutPage() {
                   src={member.image}
                   alt={member.name}
                   width={320}
-                  height={400}
-                  className="h-64 w-full object-cover object-top"
+                  height={480}
+                  className="aspect-[2/3] w-full object-contain"
                 />
                 <div className="p-5 text-center">
                   <h3 className="text-lg font-semibold tracking-[-.02em] text-foreground">
