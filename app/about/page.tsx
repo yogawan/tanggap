@@ -21,6 +21,24 @@ const values = [
   },
 ];
 
+const team = [
+  {
+    name: "Ali",
+    role: "Frontend Developer",
+    image: "/Ali as a Frontend Dev.png",
+  },
+  {
+    name: "Lathif",
+    role: "AI Developer",
+    image: "/Lathif as a AI Dev.png",
+  },
+  {
+    name: "Yogawan",
+    role: "UI/UX & Frontend Assistant",
+    image: "/Yogawan as a UI-UX and Frontend Asistant.png",
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="overflow-hidden bg-background text-foreground">
@@ -97,6 +115,46 @@ export default function AboutPage() {
                 <p className="mt-3 text-sm leading-6 text-muted">
                   {value.copy}
                 </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-bold tracking-[.18em] text-primary">
+              TIM KAMI
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-foreground sm:text-3xl">
+              Tim di balik TanggapAI
+            </h2>
+            <p className="mt-4 leading-7 text-muted">
+              Tim kecil yang membangun Tanggap agar operator logistik punya AI
+              Agent yang sigap menangani exception operasional.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+            {team.map((member) => (
+              <article
+                key={member.name}
+                className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card"
+              >
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={320}
+                  height={400}
+                  className="h-64 w-full object-cover object-top"
+                />
+                <div className="p-5 text-center">
+                  <h3 className="text-lg font-semibold tracking-[-.02em] text-foreground">
+                    {member.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted">{member.role}</p>
+                </div>
               </article>
             ))}
           </div>

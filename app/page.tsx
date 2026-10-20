@@ -193,7 +193,7 @@ const navLinks = [
   { href: "#platform", label: "Platform" },
   { href: "#cara-kerja", label: "Cara Kerja" },
   { href: "#integrasi", label: "Integrasi" },
-  { href: "#tentang", label: "Tentang" },
+  { href: "/about", label: "Tentang" },
 ];
 
 export default function LandingPage() {
@@ -304,15 +304,25 @@ function Navbar() {
           TanggapAI
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("#") ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
         <LinkButton href="/agent">
           Coba TanggapAI <ArrowRight className="h-4 w-4" />
