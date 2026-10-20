@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const links = [
+export const links = [
   { href: "/overview", label: "Overview" },
   { href: "/exceptions", label: "Exceptions" },
   { href: "/agent", label: "Agent Workspace" },
@@ -12,12 +12,11 @@ const links = [
 export function Sidebar() {
   const pathname = usePathname();
 
+  // The agent workspace renders these same links inside its own sidebar.
+  if (pathname === "/agent") return null;
+
   return (
     <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-surface px-4 py-6">
-      <div className="mb-8 px-2">
-        <p className="text-lg font-semibold text-foreground">Tanggap AI</p>
-        <p className="text-xs text-muted">LogiResolve Agent</p>
-      </div>
       <nav className="flex flex-col gap-1">
         {links.map((link) => {
           const active = pathname === link.href;
