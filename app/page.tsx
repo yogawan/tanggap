@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
+import { SectionIntro } from "@/components/ui/SectionIntro";
 import { useTimeGreeting } from "@/lib/useTimeGreeting";
 
 const examplePrompts = [
@@ -241,30 +242,6 @@ function Logo({ className = "h-14 w-14" }: { className?: string }) {
       height={96}
       className={`shrink-0 object-contain ${className}`}
     />
-  );
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  copy,
-  centered = false,
-}: {
-  eyebrow: string;
-  title: string;
-  copy: string;
-  centered?: boolean;
-}) {
-  return (
-    <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <p className="text-xs font-bold tracking-[.18em] text-primary">
-        {eyebrow}
-      </p>
-      <h2 className="mt-3 text-3xl font-semibold tracking-[-.03em] text-foreground sm:text-4xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-base leading-7 text-muted">{copy}</p>
-    </div>
   );
 }
 
