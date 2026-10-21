@@ -5,13 +5,13 @@ import type { StoredChat } from "./chat-history";
 export const dummyChats: StoredChat[] = [
   {
     id: "demo-resolve-sh-8821",
-    title: "Resolve shipment SH-8821",
+    title: "Selesaikan pengiriman SH-8821",
     createdAt: "2026-10-21T01:58:00.000Z",
     updatedAt: "2026-10-21T02:03:00.000Z",
     messages: [
       {
         role: "user",
-        content: "Resolve shipment SH-8821",
+        content: "Selesaikan pengiriman SH-8821",
         createdAt: "2026-10-21T01:58:00.000Z",
       },
       {
@@ -71,13 +71,13 @@ export const dummyChats: StoredChat[] = [
   },
   {
     id: "demo-investigate-sh-8821",
-    title: "Investigate SH-8821",
+    title: "Investigasi SH-8821",
     createdAt: "2026-10-21T03:10:00.000Z",
     updatedAt: "2026-10-21T03:10:25.000Z",
     messages: [
       {
         role: "user",
-        content: "Investigate SH-8821",
+        content: "Investigasi SH-8821",
         createdAt: "2026-10-21T03:10:00.000Z",
       },
       {
@@ -85,20 +85,20 @@ export const dummyChats: StoredChat[] = [
         status: "completed",
         stages: ["investigate", "reason"],
         content:
-          'Hasil investigasi SH-8821:\n\nShipment\n- Customer: PT Sumber Makmur\n- Rute: Jakarta → Bandung\n- Prioritas: high\n- Status saat ini: delayed\n- Estimasi tiba (awal): 14:30\n\nException\n- Tipe: vehicle_breakdown\n- Severity: critical\n- Terdeteksi: 09:14, di KM 97 Tol Cipularang\n- Deskripsi: kendaraan B 9012 ABC overheat dan tidak dapat melanjutkan perjalanan.\n\nDriver Agus Wijaya aman dan standby menunggu kendaraan pengganti.\n\nRekomendasi: reassign ke kendaraan dan driver pengganti yang tersedia agar pengiriman dapat segera dilanjutkan. Ketik "Resolve shipment SH-8821" jika ingin saya proses.',
+          'Hasil investigasi SH-8821:\n\nShipment\n- Customer: PT Sumber Makmur\n- Rute: Jakarta → Bandung\n- Prioritas: high\n- Status saat ini: delayed\n- Estimasi tiba (awal): 14:30\n\nException\n- Tipe: vehicle_breakdown\n- Severity: critical\n- Terdeteksi: 09:14, di KM 97 Tol Cipularang\n- Deskripsi: kendaraan B 9012 ABC overheat dan tidak dapat melanjutkan perjalanan.\n\nDriver Agus Wijaya aman dan standby menunggu kendaraan pengganti.\n\nRekomendasi: reassign ke kendaraan dan driver pengganti yang tersedia agar pengiriman dapat segera dilanjutkan. Ketik "Selesaikan pengiriman SH-8821" jika ingin saya proses.',
         createdAt: "2026-10-21T03:10:25.000Z",
       },
     ],
   },
   {
     id: "demo-why-sh-8821-delayed",
-    title: "Why is SH-8821 delayed?",
+    title: "Mengapa SH-8821 tertunda?",
     createdAt: "2026-10-21T03:25:00.000Z",
     updatedAt: "2026-10-21T03:25:20.000Z",
     messages: [
       {
         role: "user",
-        content: "Why is SH-8821 delayed?",
+        content: "Mengapa SH-8821 tertunda?",
         createdAt: "2026-10-21T03:25:00.000Z",
       },
       {
@@ -113,13 +113,13 @@ export const dummyChats: StoredChat[] = [
   },
   {
     id: "demo-find-available-drivers",
-    title: "Find available drivers",
+    title: "Cari driver yang tersedia",
     createdAt: "2026-10-21T04:05:00.000Z",
     updatedAt: "2026-10-21T04:05:15.000Z",
     messages: [
       {
         role: "user",
-        content: "Find available drivers",
+        content: "Cari driver yang tersedia",
         createdAt: "2026-10-21T04:05:00.000Z",
       },
       {
@@ -134,13 +134,13 @@ export const dummyChats: StoredChat[] = [
   },
   {
     id: "demo-show-critical-exceptions",
-    title: "Show critical exceptions",
+    title: "Tampilkan exception kritis",
     createdAt: "2026-10-21T04:40:00.000Z",
     updatedAt: "2026-10-21T04:40:20.000Z",
     messages: [
       {
         role: "user",
-        content: "Show critical exceptions",
+        content: "Tampilkan exception kritis",
         createdAt: "2026-10-21T04:40:00.000Z",
       },
       {
@@ -148,20 +148,20 @@ export const dummyChats: StoredChat[] = [
         status: "completed",
         stages: ["investigate"],
         content:
-          'Exception aktif dengan severity critical/high saat ini:\n\n1. SH-8821 — vehicle_breakdown (critical) — Jakarta → Bandung — kendaraan overheat, driver standby\n2. SH-8835 — driver_unavailable (high) — Surabaya → Malang — driver sakit mendadak, kendaraan idle\n3. SH-8790 — route_blocked (critical) — Jakarta → Semarang — jalur utama banjir, perlu reroute\n4. SH-8902 — late_delivery (high) — Medan → Pekanbaru — sudah melewati ETA 2 jam 15 menit\n\n4 shipment membutuhkan tindakan segera. Ketik "Handle all critical logistics exceptions" jika ingin saya proses semuanya secara berurutan.',
+          'Exception aktif dengan severity critical/high saat ini:\n\n1. SH-8821 — vehicle_breakdown (critical) — Jakarta → Bandung — kendaraan overheat, driver standby\n2. SH-8835 — driver_unavailable (high) — Surabaya → Malang — driver sakit mendadak, kendaraan idle\n3. SH-8790 — route_blocked (critical) — Jakarta → Semarang — jalur utama banjir, perlu reroute\n4. SH-8902 — late_delivery (high) — Medan → Pekanbaru — sudah melewati ETA 2 jam 15 menit\n\n4 shipment membutuhkan tindakan segera. Ketik "Tangani semua exception logistik kritis" jika ingin saya proses semuanya secara berurutan.',
         createdAt: "2026-10-21T04:40:20.000Z",
       },
     ],
   },
   {
     id: "demo-handle-all-critical",
-    title: "Handle all critical logistics exceptions",
+    title: "Tangani semua exception logistik kritis",
     createdAt: "2026-10-21T05:00:00.000Z",
     updatedAt: "2026-10-21T05:07:00.000Z",
     messages: [
       {
         role: "user",
-        content: "Handle all critical logistics exceptions",
+        content: "Tangani semua exception logistik kritis",
         createdAt: "2026-10-21T05:00:00.000Z",
       },
       {
