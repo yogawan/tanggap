@@ -2,14 +2,17 @@
 
 import {
   AlertTriangle,
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
   ClipboardList,
+  Menu,
   Search,
   SendHorizontal,
   ShieldAlert,
   Truck,
   Wrench,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,12 +37,12 @@ import { useTimeGreeting } from "@/lib/useTimeGreeting";
 const dummyChatIds = new Set(dummyChats.map((chat) => chat.id));
 
 const templates = [
-  { icon: Wrench, text: "Resolve shipment SH-8821" },
-  { icon: Search, text: "Investigate SH-8821" },
-  { icon: AlertTriangle, text: "Why is SH-8821 delayed?" },
-  { icon: Truck, text: "Find available drivers" },
-  { icon: ClipboardList, text: "Show critical exceptions" },
-  { icon: ShieldAlert, text: "Handle all critical logistics exceptions" },
+  { icon: Wrench, text: "Selesaikan pengiriman SH-8821" },
+  { icon: Search, text: "Investigasi SH-8821" },
+  { icon: AlertTriangle, text: "Mengapa SH-8821 tertunda?" },
+  { icon: Truck, text: "Cari driver yang tersedia" },
+  { icon: ClipboardList, text: "Tampilkan exception kritis" },
+  { icon: ShieldAlert, text: "Tangani semua exception logistik kritis" },
 ];
 
 const stageMeta: Record<AgentStage, { label: string; image: string }> = {
@@ -128,7 +131,21 @@ function AgentWorkspace() {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const autoSentRef = useRef(false);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    document.body.style.overflow = "hidden";
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setMobileOpen(false);
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [mobileOpen]);
 
   const allChats = [...dummyChats, ...chats];
   const activeChat = allChats.find((chat) => chat.id === activeChatId);
@@ -155,6 +172,7 @@ function AgentWorkspace() {
   function handleNewChat() {
     setActiveChatId(null);
     setInput("");
+    setMobileOpen(false);
   }
 
   async function handleSend(text: string) {
@@ -236,11 +254,11 @@ function AgentWorkspace() {
   return (
     <div className="flex items-start">
       <aside
-        className={`sticky top-0 h-screen shrink-0 overflow-hidden border-r border-border bg-surface transition-[width] duration-200 ${
-          collapsed ? "w-0 border-r-0" : "w-64"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] shrink-0 overflow-hidden border-r border-border bg-surface transition-transform duration-200 lg:sticky lg:inset-y-auto lg:left-auto lg:top-0 lg:z-0 lg:h-screen lg:max-w-none lg:translate-x-0 lg:transition-[width] ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } ${collapsed ? "lg:w-0 lg:border-r-0" : "lg:w-64"}`}
       >
-        <div className="flex h-full w-64 flex-col">
+        <div className="flex h-full w-72 flex-col lg:w-64">
           <div className="flex items-center gap-2 border-b border-border p-4 font-semibold text-foreground">
             <Image
               src="/TanggapAI-Logo.png"
@@ -250,6 +268,14 @@ function AgentWorkspace() {
               className="h-12 w-12 shrink-0 object-contain"
             />
             TanggapAI
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Tutup menu"
+              className="ml-auto rounded-lg p-1.5 text-muted hover:bg-background hover:text-foreground lg:hidden"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
           <div className="border-b border-border p-4">
             <Button className="w-full" onClick={handleNewChat}>
@@ -261,7 +287,10 @@ function AgentWorkspace() {
               <button
                 key={chat.id}
                 type="button"
-                onClick={() => setActiveChatId(chat.id)}
+                onClick={() => {
+                  setActiveChatId(chat.id);
+                  setMobileOpen(false);
+                }}
                 className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
                   chat.id === activeChatId
                     ? "bg-primary-light text-primary"
@@ -280,6 +309,7 @@ function AgentWorkspace() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => setMobileOpen(false)}
                   className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     active
                       ? "bg-primary-light text-primary"
@@ -294,11 +324,19 @@ function AgentWorkspace() {
         </div>
       </aside>
 
+      <div
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+        className={`fixed inset-0 z-40 bg-foreground/40 transition-opacity duration-200 lg:hidden ${
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+
       <button
         type="button"
         onClick={() => setCollapsed((c) => !c)}
         aria-label={collapsed ? "Buka sidebar" : "Tutup sidebar"}
-        className="sticky top-4 z-10 ml-2 flex h-7 w-7 shrink-0 items-center justify-center self-start rounded-full border border-border bg-surface text-muted shadow-sm transition-colors hover:text-foreground"
+        className="sticky top-4 z-10 ml-2 hidden h-7 w-7 shrink-0 items-center justify-center self-start rounded-full border border-border bg-surface text-muted shadow-sm transition-colors hover:text-foreground lg:flex"
       >
         {collapsed ? (
           <ChevronRight className="h-4 w-4" />
@@ -308,84 +346,108 @@ function AgentWorkspace() {
       </button>
 
       <div className="min-w-0 flex-1">
+        <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-surface px-4 py-3 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Buka menu"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-background hover:text-foreground"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <Image
+            src="/TanggapAI-Logo.png"
+            alt="TanggapAI"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain"
+          />
+          <span className="font-semibold text-foreground">TanggapAI</span>
+        </div>
         {!activeChat || activeChat.messages.length === 0 ? (
-          <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
-            <div className="text-center">
-              <div className="flex justify-center">
-                <Image
-                  src="/Tanggap.png"
-                  alt="Tanggap"
-                  width={112}
-                  height={112}
-                  className="h-28 w-28 object-contain"
-                />
+          <>
+            <div className="px-5 py-10 sm:px-8 sm:py-16">
+              <div className="mx-auto max-w-5xl text-center">
+                <div className="flex justify-center">
+                  <Image
+                    src="/Tanggap.png"
+                    alt="Tanggap"
+                    width={112}
+                    height={112}
+                    className="h-20 w-20 object-contain sm:h-28 sm:w-28"
+                  />
+                </div>
+                <p className="mt-2 text-lg font-medium text-muted sm:text-2xl">
+                  {greeting}, aku Tanggap
+                </p>
+                <h1 className="mt-1 text-2xl font-semibold tracking-[-.02em] text-foreground sm:text-4xl">
+                  Ada yang ingin kamu{" "}
+                  <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">
+                    tangani
+                  </span>{" "}
+                  hari ini?
+                </h1>
               </div>
-              <p className="mt-2 text-xl font-medium text-muted sm:text-2xl">
-                {greeting}, aku Tanggap
-              </p>
-              <h1 className="mt-1 text-3xl font-semibold tracking-[-.02em] text-foreground sm:text-4xl">
-                Ada yang ingin kamu{" "}
-                <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">
-                  tangani
-                </span>{" "}
-                hari ini?
-              </h1>
             </div>
 
-            <div className="mt-8">
-              <form onSubmit={handleSubmit} className="relative">
-                <div
-                  aria-hidden="true"
-                  className="absolute -inset-2 rounded-[2.5rem] bg-gradient-to-r from-primary to-info opacity-40 blur-2xl"
-                />
-                <textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Jelaskan masalah operasional yang ingin diselesaikan..."
-                  rows={5}
-                  className="relative w-full resize-none rounded-[2rem] border border-border bg-surface py-7 pr-24 pl-7 text-lg text-foreground shadow-xl shadow-foreground/5 placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                />
-                <button
-                  type="submit"
-                  disabled={sending || input.trim().length === 0}
-                  aria-label="Kirim instruksi"
-                  className="absolute right-5 bottom-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-hover disabled:opacity-40"
-                >
-                  <SendHorizontal className="h-6 w-6" />
-                </button>
-              </form>
-
-              <div className="mt-8 flex flex-col gap-1">
-                {templates.map((template, index) => (
+            <div
+              className={`fixed inset-x-0 bottom-0 z-10 px-5 pb-4 transition-[left] duration-200 sm:px-8 ${collapsed ? "lg:left-0" : "lg:left-64"}`}
+            >
+              <div className="mx-auto max-w-5xl">
+                <form onSubmit={handleSubmit} className="relative">
+                  <div
+                    aria-hidden="true"
+                    className="absolute -inset-2 rounded-[2.5rem] bg-gradient-to-r from-primary to-info opacity-40 blur-2xl"
+                  />
+                  <textarea
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Jelaskan masalah operasional yang ingin diselesaikan..."
+                    rows={5}
+                    className="relative w-full resize-none rounded-3xl border border-border bg-surface py-5 pr-16 pl-5 text-base text-foreground shadow-xl shadow-foreground/5 placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 sm:rounded-[2rem] sm:py-7 sm:pr-24 sm:pl-7 sm:text-lg"
+                  />
                   <button
-                    key={template.text}
-                    type="button"
-                    onClick={() => setInput(template.text)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-primary-light/40"
+                    type="submit"
+                    disabled={sending || input.trim().length === 0}
+                    aria-label="Kirim instruksi"
+                    className="absolute right-3 bottom-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-hover disabled:opacity-40 sm:right-5 sm:bottom-5 sm:h-12 sm:w-12"
                   >
-                    <template.icon
-                      className="h-4 w-4 shrink-0 text-primary"
-                      strokeWidth={1.75}
-                    />
-                    <span
-                      className={`text-sm text-foreground ${templateFadeOpacity[index] ?? ""}`}
-                    >
-                      {template.text}
-                    </span>
+                    <SendHorizontal className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
-                ))}
+                </form>
+
+                <div className="mt-8 flex flex-col gap-1">
+                  {templates.map((template, index) => (
+                    <button
+                      key={template.text}
+                      type="button"
+                      onClick={() => setInput(template.text)}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-primary-light/40"
+                    >
+                      <template.icon
+                        className="h-4 w-4 shrink-0 text-primary"
+                        strokeWidth={1.75}
+                      />
+                      <span
+                        className={`text-sm text-foreground ${templateFadeOpacity[index] ?? ""}`}
+                      >
+                        {template.text}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ) : (
           <>
             {isDummyChat && (
-              <div className="border-b border-primary-light bg-primary-light/30 px-6 py-3 text-xs font-medium text-primary">
+              <div className="border-b border-primary-light bg-primary-light/30 px-4 py-3 text-xs font-medium text-primary sm:px-6">
                 Contoh skenario — menunjukkan bagaimana TanggapAI menyelesaikan
                 kasus ini secara end-to-end.
               </div>
             )}
-            <div className="space-y-4 p-6">
+            <div className="space-y-4 p-4 pb-32 sm:p-6 sm:pb-40">
               {activeChat.messages.map((message, i) => (
                 <MessageBubble
                   // biome-ignore lint/suspicious/noArrayIndexKey: messages are append-only, never reordered
@@ -406,7 +468,7 @@ function AgentWorkspace() {
                     alt="Tanggap"
                     width={64}
                     height={64}
-                    className="h-16 w-16 shrink-0 object-contain"
+                    className="h-10 w-10 shrink-0 object-contain sm:h-16 sm:w-16"
                   />
                   <div className="rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3 text-sm text-muted">
                     Tanggap sedang bekerja…
@@ -415,7 +477,9 @@ function AgentWorkspace() {
               )}
             </div>
 
-            <div className="sticky bottom-0 px-6 pb-6">
+            <div
+              className={`fixed inset-x-0 bottom-0 z-10 px-4 pb-4 transition-[left] duration-200 sm:px-6 sm:pb-6 ${collapsed ? "lg:left-0" : "lg:left-64"}`}
+            >
               {isDummyChat ? (
                 <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-surface p-4 text-center text-sm text-muted shadow-xl shadow-foreground/10">
                   Ini contoh demo yang sudah selesai.{" "}
@@ -434,7 +498,7 @@ function AgentWorkspace() {
                     <textarea
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
-                      placeholder='Contoh: "Resolve shipment SH-8821"'
+                      placeholder='Contoh: "Selesaikan pengiriman SH-8821"'
                       rows={2}
                       className="flex-1 resize-none bg-transparent px-3 py-2.5 text-sm text-foreground placeholder:text-muted focus:outline-none"
                     />
@@ -467,7 +531,7 @@ function MessageBubble({
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
-        <div className="max-w-lg rounded-2xl rounded-br-sm bg-primary px-4 py-2.5 text-sm text-white">
+        <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-4 py-2.5 text-sm text-white sm:max-w-lg">
           {message.content}
         </div>
       </div>
@@ -495,9 +559,9 @@ function MessageBubble({
         alt="Tanggap"
         width={64}
         height={64}
-        className="h-16 w-16 shrink-0 object-contain"
+        className="h-10 w-10 shrink-0 object-contain sm:h-16 sm:w-16"
       />
-      <div className="max-w-lg space-y-3 rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3 text-sm text-foreground">
+      <div className="min-w-0 max-w-[85%] space-y-3 rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3 text-sm text-foreground sm:max-w-lg">
         <div>
           <Badge tone={tone}>{label}</Badge>
           {message.stages && message.stages.length > 0 && (
@@ -510,7 +574,7 @@ function MessageBubble({
                     alt=""
                     width={48}
                     height={48}
-                    className="h-12 w-12 object-contain"
+                    className="h-8 w-8 object-contain sm:h-12 sm:w-12"
                   />
                   {stageMeta[stage].label}
                 </span>
@@ -518,7 +582,9 @@ function MessageBubble({
             </div>
           )}
         </div>
-        <p className="whitespace-pre-wrap leading-6">{message.content}</p>
+        <p className="whitespace-pre-wrap break-words leading-6">
+          {message.content}
+        </p>
         {message.status === "pending_approval" && (
           <div className="rounded-xl border border-primary-light bg-primary-light/30 p-3">
             <p className="font-mono text-xs font-semibold text-primary">
@@ -540,9 +606,10 @@ function MessageBubble({
         {message.executionId && !message.executionId.startsWith("demo-") && (
           <Link
             href={`/agent/${message.executionId}`}
-            className="inline-block text-xs font-medium text-primary hover:underline"
+            className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
           >
-            Lihat trace lengkap →
+            Lihat trace lengkap
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         )}
       </div>
