@@ -466,7 +466,7 @@ function Solution() {
             alt="Workflow: TMS, ERP, Fleet, dan Tracking mengalir ke TanggapAI Platform, diproses oleh Tanggap AI Agent melalui tahap Investigate-Reason-Plan-Execute-Verify, menghasilkan Operational Actions seperti Reassign Shipment, Update ETA, dan Notify Customer."
             width={520}
             height={397}
-            className="h-auto w-full rounded-2xl"
+            className="mx-auto h-auto w-full max-w-[480px] rounded-2xl"
           />
 
           <div className="grid gap-3">
