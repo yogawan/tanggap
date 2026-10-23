@@ -461,35 +461,13 @@ function Solution() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_.85fr] lg:items-start">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
-            <p className="text-center text-xs font-bold tracking-[.14em] text-primary-light">
-              WORKFLOW
-            </p>
-            <div className="mt-6 flex flex-col items-center gap-1.5 text-center text-sm font-semibold">
-              <span className="rounded-lg border border-white/15 bg-white/10 px-4 py-2">
-                TMS · ERP · Fleet · Tracking
-              </span>
-              <span className="text-primary-light">↓</span>
-              <span className="rounded-lg border border-white/15 bg-white/10 px-4 py-2">
-                TanggapAI Platform
-              </span>
-              <span className="text-primary-light">↓</span>
-              <span className="rounded-lg bg-white px-5 py-2.5 text-primary-hover">
-                Tanggap AI Agent
-              </span>
-              <span className="text-primary-light">↓</span>
-              <span className="max-w-xs rounded-lg border border-primary-light/40 bg-primary-light/10 px-4 py-2 text-[11px] font-bold tracking-wide text-primary-light">
-                Investigate - Reason - Plan - Execute - Verify
-              </span>
-              <span className="text-primary-light">↓</span>
-              <span className="rounded-lg border border-white/15 bg-white/10 px-4 py-2">
-                Operational Actions
-              </span>
-              <span className="text-xs font-normal text-primary-light/70">
-                Reassign Shipment · Update ETA · Notify Customer
-              </span>
-            </div>
-          </div>
+          <Image
+            src="/workflow.png"
+            alt="Workflow: TMS, ERP, Fleet, dan Tracking mengalir ke TanggapAI Platform, diproses oleh Tanggap AI Agent melalui tahap Investigate-Reason-Plan-Execute-Verify, menghasilkan Operational Actions seperti Reassign Shipment, Update ETA, dan Notify Customer."
+            width={520}
+            height={397}
+            className="h-auto w-full rounded-2xl"
+          />
 
           <div className="grid gap-3">
             {[
