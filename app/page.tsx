@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
+import { SplashScreen } from "@/components/splash-screen";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { useTimeGreeting } from "@/lib/useTimeGreeting";
 
@@ -201,6 +202,7 @@ const navLinks = [
 export default function LandingPage() {
   return (
     <main className="overflow-hidden bg-background text-foreground">
+      <SplashScreen />
       <Navbar />
       <Hero />
       <Problem />

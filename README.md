@@ -36,3 +36,13 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 https://www.figma.com/slides/LkAbjaqr4rpnyV2aqyWUkA
+
+## Tim Pengembang
+
+Proyek ini dikembangkan oleh **Tim CH Miaw Miaw Ali Kristen** untuk kompetisi UINIC 7.0:
+
+| Nama | NIM | Role |
+| --- | --- | --- |
+| Lathif Ramadhan | 5231811022 | Ketua Tim & AI Developer |
+| Ali Sahat Pardomuan P. | 5220411321 | Frontend Developer |
+| Yogawan Aditya Pratama | 5220411056 | UI/UX & Frontend Assistant |

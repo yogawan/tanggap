@@ -23,17 +23,17 @@ const values = [
 
 const team = [
   {
-    name: "Lathif",
-    role: "AI Developer",
+    name: "Lathif Ramadhan",
+    role: "Ketua Tim & AI Developer",
     image: "/Lathif as a AI Dev.png",
   },
   {
-    name: "Ali",
+    name: "Ali Sahat Pardomuan P.",
     role: "Frontend Developer",
     image: "/Ali as a Frontend Dev.png",
   },
   {
-    name: "Yogawan",
+    name: "Yogawan Aditya Pratama",
     role: "UI/UX & Frontend Assistant",
     image: "/Yogawan as a UI-UX and Frontend Asistant.png",
   },
