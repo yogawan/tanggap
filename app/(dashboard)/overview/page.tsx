@@ -2,6 +2,7 @@ import type mongoose from "mongoose";
 import Image from "next/image";
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { DataSourceSwitcher } from "@/components/ui/DataSourceSwitcher";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { StatCard } from "@/components/ui/StatCard";
 import AgentExecution from "@/models/AgentExecution";
@@ -94,12 +95,15 @@ export default async function OverviewPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 lg:py-12">
-      <SectionIntro
-        as="h1"
-        eyebrow="OPERATIONS OVERVIEW"
-        title="Dashboard"
-        copy="Operational snapshot across all shipments and exceptions."
-      />
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+        <SectionIntro
+          as="h1"
+          eyebrow="OPERATIONS OVERVIEW"
+          title="Dashboard"
+          copy="Operational snapshot across all shipments and exceptions."
+        />
+        <DataSourceSwitcher />
+      </div>
 
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <StatCard
