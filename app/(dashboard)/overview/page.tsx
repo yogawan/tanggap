@@ -101,7 +101,7 @@ export default async function OverviewPage() {
         copy="Operational snapshot across all shipments and exceptions."
       />
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <StatCard
           label="Total Shipments"
           value={totalShipments}
@@ -176,9 +176,9 @@ export default async function OverviewPage() {
                     return (
                       <Card
                         key={exception._id.toString()}
-                        className="flex items-center justify-between gap-4"
+                        className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
                       >
-                        <div>
+                        <div className="min-w-0">
                           <p className="font-medium text-foreground">
                             {shipment?.shipmentNumber ?? "Unknown shipment"} —{" "}
                             {exception.type.replace(/_/g, " ")}

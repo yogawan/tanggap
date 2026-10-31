@@ -1,11 +1,6 @@
 import type { ReactNode } from "react";
-import { Sidebar } from "@/components/layout/Sidebar";
+import { DashboardChrome } from "@/components/layout/DashboardChrome";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex min-h-full">
-      <Sidebar />
-      <main className="min-h-screen min-w-0 flex-1">{children}</main>
-    </div>
-  );
+  return <DashboardChrome>{children}</DashboardChrome>;
 }
