@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ComponentType } from "react";
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
+import { Reveal } from "@/components/ui/Reveal";
 import AgentExecution from "@/models/AgentExecution";
 import dbConnect from "@/models/db";
 
@@ -82,78 +83,82 @@ export default async function ExecutionTracePage({
 
   return (
     <div className="p-8">
-      <Link
-        href="/agent"
-        className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="h-4 w-4" /> Kembali ke Agent Workspace
-      </Link>
+      <Reveal scroll={false} stagger={0.1} y={14} duration={0.5}>
+        <Link
+          href="/agent"
+          className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" /> Kembali ke Agent Workspace
+        </Link>
 
-      <div className="mt-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-bold tracking-[.14em] text-muted">
-            AGENT EXECUTION TRACE
-          </p>
-          <h1 className="mt-1 text-xl font-semibold text-foreground">
-            {exec.task}
-          </h1>
-          <p className="mt-1 text-xs text-muted">
-            Mulai {formatTime(exec.startedAt)}
-            {exec.completedAt && ` · Selesai ${formatTime(exec.completedAt)}`}
-          </p>
+        <div className="mt-4 flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold tracking-[.14em] text-muted">
+              AGENT EXECUTION TRACE
+            </p>
+            <h1 className="mt-1 text-xl font-semibold text-foreground">
+              {exec.task}
+            </h1>
+            <p className="mt-1 text-xs text-muted">
+              Mulai {formatTime(exec.startedAt)}
+              {exec.completedAt && ` · Selesai ${formatTime(exec.completedAt)}`}
+            </p>
+          </div>
+          <Badge tone={statusTone[exec.status]}>{exec.status}</Badge>
         </div>
-        <Badge tone={statusTone[exec.status]}>{exec.status}</Badge>
-      </div>
+      </Reveal>
 
-      <ol className="mt-8 space-y-4 border-l border-border pl-6">
-        {exec.steps.map((step, i) => {
-          const meta = stepMeta[step.type];
-          const Icon = meta.icon;
-          return (
-            <li
-              // biome-ignore lint/suspicious/noArrayIndexKey: steps are append-only, never reordered
-              key={i}
-              className="relative"
-            >
-              <span
-                className={`absolute -left-[2.05rem] flex h-7 w-7 items-center justify-center rounded-full border bg-background ${meta.tone}`}
+      <Reveal className="contents" stagger={0.1} target="li">
+        <ol className="mt-8 space-y-4 border-l border-border pl-6">
+          {exec.steps.map((step, i) => {
+            const meta = stepMeta[step.type];
+            const Icon = meta.icon;
+            return (
+              <li
+                // biome-ignore lint/suspicious/noArrayIndexKey: steps are append-only, never reordered
+                key={i}
+                className="relative"
               >
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              <div className="rounded-xl border border-border bg-surface p-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-bold tracking-wide text-muted">
-                    {String(i + 1).padStart(2, "0")} · {meta.label}
-                  </span>
-                  {step.tool && (
-                    <span className="font-mono text-xs font-semibold text-primary">
-                      {step.tool}
+                <span
+                  className={`absolute -left-[2.05rem] flex h-7 w-7 items-center justify-center rounded-full border bg-background ${meta.tone}`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                </span>
+                <div className="rounded-xl border border-border bg-surface p-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-bold tracking-wide text-muted">
+                      {String(i + 1).padStart(2, "0")} · {meta.label}
                     </span>
+                    {step.tool && (
+                      <span className="font-mono text-xs font-semibold text-primary">
+                        {step.tool}
+                      </span>
+                    )}
+                  </div>
+                  {step.message && (
+                    <p className="mt-2 text-sm leading-6 text-foreground">
+                      {step.message}
+                    </p>
                   )}
-                </div>
-                {step.message && (
-                  <p className="mt-2 text-sm leading-6 text-foreground">
-                    {step.message}
+                  {step.input !== undefined && (
+                    <pre className="mt-2 overflow-x-auto rounded-lg bg-background p-2 text-xs text-muted">
+                      {JSON.stringify(step.input, null, 2)}
+                    </pre>
+                  )}
+                  {step.output !== undefined && (
+                    <pre className="mt-2 overflow-x-auto rounded-lg bg-background p-2 text-xs text-muted">
+                      {JSON.stringify(step.output, null, 2)}
+                    </pre>
+                  )}
+                  <p className="mt-2 text-[10px] text-muted">
+                    {formatTime(step.timestamp)}
                   </p>
-                )}
-                {step.input !== undefined && (
-                  <pre className="mt-2 overflow-x-auto rounded-lg bg-background p-2 text-xs text-muted">
-                    {JSON.stringify(step.input, null, 2)}
-                  </pre>
-                )}
-                {step.output !== undefined && (
-                  <pre className="mt-2 overflow-x-auto rounded-lg bg-background p-2 text-xs text-muted">
-                    {JSON.stringify(step.output, null, 2)}
-                  </pre>
-                )}
-                <p className="mt-2 text-[10px] text-muted">
-                  {formatTime(step.timestamp)}
-                </p>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </Reveal>
     </div>
   );
 }

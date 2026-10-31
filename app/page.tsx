@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
 import { SplashScreen } from "@/components/splash-screen";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { useTimeGreeting } from "@/lib/useTimeGreeting";
 
@@ -275,7 +276,12 @@ function LinkButton({
 function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+      <Reveal
+        scroll={false}
+        y={-12}
+        duration={0.5}
+        className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8"
+      >
         <Link
           href="/"
           className="flex items-center gap-2 font-semibold text-foreground"
@@ -307,7 +313,7 @@ function Navbar() {
         <LinkButton href="/agent">
           Coba TanggapAI <ArrowRight className="h-4 w-4" />
         </LinkButton>
-      </div>
+      </Reveal>
     </header>
   );
 }
@@ -322,7 +328,13 @@ function Hero() {
         className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-15"
       />
       <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
-        <div className="text-center">
+        <Reveal
+          scroll={false}
+          stagger={0.12}
+          y={20}
+          duration={0.6}
+          className="text-center"
+        >
           <div className="flex justify-center">
             <WaletMascot size="md" />
           </div>
@@ -336,10 +348,10 @@ function Hero() {
             </span>{" "}
             hari ini?
           </h1>
-        </div>
-        <div className="mt-8">
+        </Reveal>
+        <Reveal scroll={false} delay={0.45} y={20} className="mt-8">
           <HeroPromptBox />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -380,7 +392,14 @@ function HeroPromptBox() {
         </button>
       </form>
 
-      <div className="mt-8 flex flex-col gap-1">
+      <Reveal
+        scroll={false}
+        delay={0.65}
+        stagger={0.06}
+        y={12}
+        duration={0.5}
+        className="mt-8 flex flex-col gap-1"
+      >
         {examplePrompts.map((example, index) => (
           <button
             key={example.text}
@@ -399,7 +418,7 @@ function HeroPromptBox() {
             </span>
           </button>
         ))}
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -407,12 +426,14 @@ function HeroPromptBox() {
 function Problem() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-      <SectionIntro
-        eyebrow="THE PROBLEM"
-        title="Sistem mencatat masalah. Operator harus menyelesaikannya."
-        copy="Ketika exception terjadi, operator perlu menghubungkan data, mencari penyebab, menentukan tindakan, dan memastikan masalah benar-benar terselesaikan."
-      />
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
+      <Reveal>
+        <SectionIntro
+          eyebrow="THE PROBLEM"
+          title="Sistem mencatat masalah. Operator harus menyelesaikannya."
+          copy="Ketika exception terjadi, operator perlu menghubungkan data, mencari penyebab, menentukan tindakan, dan memastikan masalah benar-benar terselesaikan."
+        />
+      </Reveal>
+      <Reveal stagger={0.12} className="mt-12 grid gap-4 md:grid-cols-3">
         {problems.map((problem) => (
           <article
             key={problem.number}
@@ -436,7 +457,7 @@ function Problem() {
             <p className="mt-3 text-sm leading-6 text-muted">{problem.copy}</p>
           </article>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -448,7 +469,7 @@ function Solution() {
       className="bg-primary-hover py-20 text-white lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="mb-4 text-[11px] font-bold tracking-[.18em] text-primary-light">
             THE SOLUTION
           </p>
@@ -460,9 +481,12 @@ function Solution() {
             sistem logistik melalui API untuk membantu menyelesaikan exception
             operasional.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_.85fr] lg:items-start">
+        <Reveal
+          stagger={0.15}
+          className="mt-12 grid gap-6 lg:grid-cols-[1fr_.85fr] lg:items-start"
+        >
           <Image
             src="/workflow.png"
             alt="Workflow: TMS, ERP, Fleet, dan Tracking mengalir ke TanggapAI Platform, diproses oleh Tanggap AI Agent melalui tahap Investigate-Reason-Plan-Execute-Verify, menghasilkan Operational Actions seperti Reassign Shipment, Update ETA, dan Notify Customer."
@@ -497,7 +521,7 @@ function Solution() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -510,12 +534,17 @@ function Capabilities() {
       className="border-y border-border bg-surface py-20 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionIntro
-          eyebrow="MEET YOUR AI AGENT"
-          title="Tanggap tidak hanya menjawab. Tanggap membantu menyelesaikan."
-          copy="Lima tahap kerja Tanggap mengubah exception menjadi proses penyelesaian yang terstruktur."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <Reveal>
+          <SectionIntro
+            eyebrow="MEET YOUR AI AGENT"
+            title="Tanggap tidak hanya menjawab. Tanggap membantu menyelesaikan."
+            copy="Lima tahap kerja Tanggap mengubah exception menjadi proses penyelesaian yang terstruktur."
+          />
+        </Reveal>
+        <Reveal
+          stagger={0.1}
+          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
+        >
           {capabilities.map((capability) => (
             <article
               key={capability.number}
@@ -541,7 +570,7 @@ function Capabilities() {
               </p>
             </article>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -553,36 +582,44 @@ function HowItWorks() {
       id="cara-kerja"
       className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"
     >
-      <SectionIntro
-        centered
-        eyebrow="SEE TANGGAP IN ACTION"
-        title="Satu instruksi. Workflow recovery yang terkoordinasi."
-        copy="Tanggap membantu operator menangani shipment yang mengalami gangguan melalui investigasi hingga verifikasi."
-      />
+      <Reveal>
+        <SectionIntro
+          centered
+          eyebrow="SEE TANGGAP IN ACTION"
+          title="Satu instruksi. Workflow recovery yang terkoordinasi."
+          copy="Tanggap membantu operator menangani shipment yang mengalami gangguan melalui investigasi hingga verifikasi."
+        />
+      </Reveal>
 
       <div className="mx-auto mt-12 max-w-3xl">
-        <div className="mb-10 rounded-2xl border border-primary-light bg-primary-light/30 px-6 py-4 text-center">
+        <Reveal className="mb-10 rounded-2xl border border-primary-light bg-primary-light/30 px-6 py-4 text-center">
           <p className="text-xs font-bold tracking-[.14em] text-primary">
             USER INSTRUCTION
           </p>
           <p className="mt-2 text-lg font-semibold text-foreground">
             &quot;Selesaikan shipment SH-8821.&quot;
           </p>
-        </div>
+        </Reveal>
 
-        <ol className="space-y-6">
-          {recoverySteps.map((step) => (
-            <li key={step.number} className="flex items-start gap-4">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                {step.number}
-              </span>
-              <div>
-                <h3 className="font-semibold text-foreground">{step.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-muted">{step.copy}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <Reveal className="contents" stagger={0.12} target="li">
+          <ol className="space-y-6">
+            {recoverySteps.map((step) => (
+              <li key={step.number} className="flex items-start gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                  {step.number}
+                </span>
+                <div>
+                  <h3 className="font-semibold text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-muted">
+                    {step.copy}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
 
         <div className="mt-10 flex justify-center">
           <LinkButton
@@ -599,45 +636,52 @@ function HowItWorks() {
 function ExecutionTrace() {
   return (
     <section className="mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
-      <SectionIntro
-        eyebrow="TRANSPARENT EXECUTION"
-        title="Setiap tindakan Tanggap memiliki jejak."
-        copy="Pantau bagaimana Tanggap memanggil tools, menerima respons sistem, dan memverifikasi hasil."
-      />
+      <Reveal>
+        <SectionIntro
+          eyebrow="TRANSPARENT EXECUTION"
+          title="Setiap tindakan Tanggap memiliki jejak."
+          copy="Pantau bagaimana Tanggap memanggil tools, menerima respons sistem, dan memverifikasi hasil."
+        />
+      </Reveal>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_.8fr] lg:items-center">
+      <Reveal
+        stagger={0.15}
+        className="mt-10 grid gap-10 lg:grid-cols-[1fr_.8fr] lg:items-center"
+      >
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-7">
           <p className="mb-4 text-xs font-bold tracking-[.14em] text-muted">
             EXAMPLE TRACE
           </p>
-          <ul className="space-y-3">
-            {executionTrace.map((step) => (
-              <li
-                key={step.label}
-                className="flex items-center gap-3 font-mono text-sm"
-              >
-                {step.status === "done" ? (
-                  <CircleCheck className="h-4 w-4 shrink-0 text-success" />
-                ) : (
-                  <Hourglass className="h-4 w-4 shrink-0 text-warning" />
-                )}
-                <span
-                  className={
-                    step.status === "done" ? "text-foreground" : "text-muted"
-                  }
+          <Reveal className="contents" stagger={0.1} target="li">
+            <ul className="space-y-3">
+              {executionTrace.map((step) => (
+                <li
+                  key={step.label}
+                  className="flex items-center gap-3 font-mono text-sm"
                 >
-                  {step.label}
-                </span>
-              </li>
-            ))}
-          </ul>
+                  {step.status === "done" ? (
+                    <CircleCheck className="h-4 w-4 shrink-0 text-success" />
+                  ) : (
+                    <Hourglass className="h-4 w-4 shrink-0 text-warning" />
+                  )}
+                  <span
+                    className={
+                      step.status === "done" ? "text-foreground" : "text-muted"
+                    }
+                  >
+                    {step.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
         <p className="text-sm leading-6 text-muted">
           Setiap langkah penting dapat ditelusuri melalui catatan eksekusi dan
           status hasilnya. Status ditampilkan sesuai hasil eksekusi aktual,
           bukan simulasi keberhasilan yang tidak terjadi.
         </p>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -649,7 +693,7 @@ function Integration() {
       className="bg-primary-hover py-20 text-white lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="mb-4 text-[11px] font-bold tracking-[.18em] text-primary-light">
             BUILT AROUND YOUR EXISTING SYSTEMS
           </p>
@@ -661,9 +705,12 @@ function Integration() {
             logistik melalui API tanpa harus mengganti sistem operasional yang
             sudah ada.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+        <Reveal
+          stagger={0.15}
+          className="mt-12 grid gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center"
+        >
           <div className="grid gap-3">
             {integrationSteps.map((step) => (
               <div
@@ -696,7 +743,7 @@ function Integration() {
               tersedia.
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -708,7 +755,10 @@ function Safety() {
       id="safety"
       className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"
     >
-      <div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <Reveal
+        stagger={0.15}
+        className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center"
+      >
         <div>
           <p className="text-xs font-bold tracking-[.18em] text-primary">
             CONTROLLED AUTONOMY
@@ -749,7 +799,7 @@ function Safety() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -757,13 +807,18 @@ function Safety() {
 function Faq() {
   return (
     <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
-      <SectionIntro
-        centered
-        eyebrow="FAQ"
-        title="Pertanyaan yang sering diajukan"
-        copy="Hal-hal dasar seputar TanggapAI dan Tanggap."
-      />
-      <div className="mt-10 divide-y divide-border border-y border-border">
+      <Reveal>
+        <SectionIntro
+          centered
+          eyebrow="FAQ"
+          title="Pertanyaan yang sering diajukan"
+          copy="Hal-hal dasar seputar TanggapAI dan Tanggap."
+        />
+      </Reveal>
+      <Reveal
+        stagger={0.08}
+        className="mt-10 divide-y divide-border border-y border-border"
+      >
         {faqs.map((faq, index) => (
           <details key={faq.q} className="group py-5" open={index === 0}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left font-semibold text-foreground">
@@ -775,7 +830,7 @@ function Faq() {
             </p>
           </details>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -783,7 +838,7 @@ function Faq() {
 function FinalCta() {
   return (
     <section className="px-5 pb-20 sm:px-8 lg:pb-28">
-      <div className="mx-auto max-w-7xl rounded-3xl bg-primary-hover px-7 py-14 text-center text-white sm:px-12 lg:py-20">
+      <Reveal className="mx-auto max-w-7xl rounded-3xl bg-primary-hover px-7 py-14 text-center text-white sm:px-12 lg:py-20">
         <div className="flex justify-center">
           <WaletMascot size="md" />
         </div>
@@ -808,7 +863,7 @@ function FinalCta() {
             Lihat Cara Kerja
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

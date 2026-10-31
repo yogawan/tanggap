@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { DataSourceSwitcher } from "@/components/ui/DataSourceSwitcher";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { StatCard } from "@/components/ui/StatCard";
 import AgentExecution from "@/models/AgentExecution";
@@ -95,7 +96,11 @@ export default async function OverviewPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 lg:py-12">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+      <Reveal
+        scroll={false}
+        stagger={0.1}
+        className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between"
+      >
         <SectionIntro
           as="h1"
           eyebrow="OPERATIONS OVERVIEW"
@@ -103,9 +108,14 @@ export default async function OverviewPage() {
           copy="Operational snapshot across all shipments and exceptions."
         />
         <DataSourceSwitcher />
-      </div>
+      </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <Reveal
+        scroll={false}
+        delay={0.2}
+        stagger={0.08}
+        className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+      >
         <StatCard
           label="Total Shipments"
           value={totalShipments}
@@ -134,17 +144,19 @@ export default async function OverviewPage() {
           value={resolutionRate}
           image="/Agent Resolution Rate.png"
         />
-      </div>
+      </Reveal>
 
       <section className="mt-16">
-        <SectionIntro
-          eyebrow="DETECTED ISSUES"
-          title="Exceptions"
-          copy="All detected exceptions, grouped by severity."
-        />
+        <Reveal>
+          <SectionIntro
+            eyebrow="DETECTED ISSUES"
+            title="Exceptions"
+            copy="All detected exceptions, grouped by severity."
+          />
+        </Reveal>
 
         {grouped.length === 0 ? (
-          <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-surface py-14 text-center">
+          <Reveal className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-surface py-14 text-center">
             <Image
               src="/Tanggap.png"
               alt="Tanggap"
@@ -158,9 +170,9 @@ export default async function OverviewPage() {
             <p className="max-w-sm text-sm leading-6 text-muted">
               All shipments are running smoothly right now.
             </p>
-          </div>
+          </Reveal>
         ) : (
-          <div className="mt-8 space-y-8">
+          <Reveal stagger={0.15} className="mt-8 space-y-8">
             {grouped.map(({ severity, items }) => (
               <section key={severity}>
                 <div className="mb-3 flex items-center gap-2">
@@ -172,7 +184,7 @@ export default async function OverviewPage() {
                   </h3>
                   <span className="text-xs text-muted">({items.length})</span>
                 </div>
-                <div className="space-y-3">
+                <Reveal stagger={0.08} className="space-y-3">
                   {items.map((exception) => {
                     const shipment = shipmentById.get(
                       exception.shipmentId.toString(),
@@ -202,10 +214,10 @@ export default async function OverviewPage() {
                       </Card>
                     );
                   })}
-                </div>
+                </Reveal>
               </section>
             ))}
-          </div>
+          </Reveal>
         )}
       </section>
     </div>

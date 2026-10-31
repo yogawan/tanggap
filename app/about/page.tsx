@@ -2,6 +2,7 @@
 import { ArrowRight, Network, Route, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
 
 const values = [
   {
@@ -43,7 +44,12 @@ export default function AboutPage() {
   return (
     <main className="overflow-hidden bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+        <Reveal
+          scroll={false}
+          y={-12}
+          duration={0.5}
+          className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8"
+        >
           <Link
             href="/"
             className="flex items-center gap-2 font-semibold text-foreground"
@@ -63,7 +69,7 @@ export default function AboutPage() {
           >
             Coba TanggapAI <ArrowRight className="h-4 w-4" />
           </Link>
-        </div>
+        </Reveal>
       </header>
 
       <section className="relative overflow-hidden text-center">
@@ -71,7 +77,13 @@ export default function AboutPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-[url('/indonesia.png')] bg-cover bg-center bg-no-repeat opacity-5"
         />
-        <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28">
+        <Reveal
+          scroll={false}
+          stagger={0.12}
+          y={20}
+          duration={0.6}
+          className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 lg:py-28"
+        >
           <p className="text-xs font-bold tracking-[.18em] text-primary">
             TENTANG KAMI
           </p>
@@ -87,12 +99,12 @@ export default function AboutPage() {
             hingga kendaraan yang bermasalah — melalui proses investigasi,
             perencanaan, eksekusi, dan verifikasi yang terstruktur.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       <section className="border-y border-border bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-semibold tracking-[-.03em] text-foreground sm:text-3xl">
               Siapa Tanggap?
             </h2>
@@ -103,9 +115,9 @@ export default function AboutPage() {
               diizinkan, dengan operator tetap memegang kendali atas tindakan
               yang berisiko.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <Reveal stagger={0.12} className="mt-12 grid gap-4 md:grid-cols-3">
             {values.map((value) => (
               <article
                 key={value.title}
@@ -123,13 +135,13 @@ export default function AboutPage() {
                 </p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-bold tracking-[.18em] text-primary">
               TIM KAMI
             </p>
@@ -140,9 +152,12 @@ export default function AboutPage() {
               Tim kecil yang membangun Tanggap agar operator logistik punya AI
               Agent yang sigap menangani exception operasional.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+          <Reveal
+            stagger={0.12}
+            className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3"
+          >
             {team.map((member) => (
               <article
                 key={member.name}
@@ -163,12 +178,12 @@ export default function AboutPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
-        <div className="mx-auto max-w-7xl rounded-3xl bg-primary-hover px-7 py-14 text-center text-white sm:px-12 lg:py-20">
+        <Reveal className="mx-auto max-w-7xl rounded-3xl bg-primary-hover px-7 py-14 text-center text-white sm:px-12 lg:py-20">
           <p className="text-[11px] font-bold tracking-[.18em] text-primary-light">
             READY TO RESPOND?
           </p>
@@ -183,7 +198,7 @@ export default function AboutPage() {
               Coba TanggapAI <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <footer className="border-t border-border bg-surface">

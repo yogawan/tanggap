@@ -22,6 +22,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { links as navLinks } from "@/components/layout/Sidebar";
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 import type { AgentTaskResult } from "@/lib/agent";
 import {
   type AgentStage,
@@ -367,7 +368,13 @@ function AgentWorkspace() {
         {!activeChat || activeChat.messages.length === 0 ? (
           <>
             <div className="px-5 py-10 sm:px-8 sm:py-16">
-              <div className="mx-auto max-w-5xl text-center">
+              <Reveal
+                scroll={false}
+                stagger={0.12}
+                y={20}
+                duration={0.6}
+                className="mx-auto max-w-5xl text-center"
+              >
                 <div className="flex justify-center">
                   <Image
                     src="/Tanggap.png"
@@ -387,7 +394,7 @@ function AgentWorkspace() {
                   </span>{" "}
                   hari ini?
                 </h1>
-              </div>
+              </Reveal>
             </div>
 
             <div
@@ -416,7 +423,14 @@ function AgentWorkspace() {
                   </button>
                 </form>
 
-                <div className="mt-8 flex flex-col gap-1">
+                <Reveal
+                  scroll={false}
+                  delay={0.65}
+                  stagger={0.06}
+                  y={12}
+                  duration={0.5}
+                  className="mt-8 flex flex-col gap-1"
+                >
                   {templates.map((template, index) => (
                     <button
                       key={template.text}
@@ -435,7 +449,7 @@ function AgentWorkspace() {
                       </span>
                     </button>
                   ))}
-                </div>
+                </Reveal>
               </div>
             </div>
           </>
@@ -462,7 +476,12 @@ function AgentWorkspace() {
                 />
               ))}
               {sending && (
-                <div className="flex items-start justify-start gap-2">
+                <Reveal
+                  scroll={false}
+                  y={10}
+                  duration={0.35}
+                  className="flex items-start justify-start gap-2"
+                >
                   <Image
                     src="/Tanggap.png"
                     alt="Tanggap"
@@ -473,7 +492,7 @@ function AgentWorkspace() {
                   <div className="rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3 text-sm text-muted">
                     Tanggap sedang bekerja…
                   </div>
-                </div>
+                </Reveal>
               )}
             </div>
 
@@ -530,11 +549,16 @@ function MessageBubble({
 }) {
   if (message.role === "user") {
     return (
-      <div className="flex justify-end">
+      <Reveal
+        scroll={false}
+        y={10}
+        duration={0.35}
+        className="flex justify-end"
+      >
         <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-4 py-2.5 text-sm text-white sm:max-w-lg">
           {message.content}
         </div>
-      </div>
+      </Reveal>
     );
   }
 
@@ -553,7 +577,12 @@ function MessageBubble({
         : "Gagal";
 
   return (
-    <div className="flex items-start justify-start gap-2">
+    <Reveal
+      scroll={false}
+      y={10}
+      duration={0.35}
+      className="flex items-start justify-start gap-2"
+    >
       <Image
         src="/Tanggap.png"
         alt="Tanggap"
@@ -613,6 +642,6 @@ function MessageBubble({
           </Link>
         )}
       </div>
-    </div>
+    </Reveal>
   );
 }
