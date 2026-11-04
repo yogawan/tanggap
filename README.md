@@ -34,6 +34,12 @@ Ketika sebuah shipment bermasalah — kendaraan rusak, driver tidak tersedia, ru
 
 TRACIA tidak menggantikan TMS atau ERP yang sudah ada. TRACIA bekerja *di atas* sistem tersebut, melalui API dan tools yang diizinkan.
 
+## Lihat TRACIA
+
+<div align="center">
+<img src="public/thumb.png" width="640" alt="Preview landing page TRACIA" />
+</div>
+
 ## Cara kerja
 
 Setiap permintaan diproses melalui lima tahap yang sama:
