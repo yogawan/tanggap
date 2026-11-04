@@ -28,13 +28,13 @@ export function Sidebar({
       <div className="flex h-full w-72 flex-col lg:w-60">
         <div className="flex items-center gap-2 border-b border-border p-4 font-semibold text-foreground">
           <Image
-            src="/TanggapAI-Logo.png"
-            alt="TanggapAI"
+            src="/TRACIA-logo.png"
+            alt="TRACIA"
             width={40}
             height={40}
             className="h-10 w-10 shrink-0 object-contain"
           />
-          TanggapAI
+          TRACIA
           <button
             type="button"
             onClick={onClose}

@@ -54,13 +54,13 @@ export function DashboardChrome({ children }: { children: ReactNode }) {
               <Menu className="h-5 w-5" />
             </button>
             <Image
-              src="/TanggapAI-Logo.png"
-              alt="TanggapAI"
+              src="/TRACIA-logo.png"
+              alt="TRACIA"
               width={28}
               height={28}
               className="h-7 w-7 shrink-0 object-contain"
             />
-            <span className="font-semibold text-foreground">TanggapAI</span>
+            <span className="font-semibold text-foreground">TRACIA</span>
           </div>
         )}
         {children}

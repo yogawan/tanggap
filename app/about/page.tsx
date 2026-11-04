@@ -8,12 +8,12 @@ const values = [
   {
     icon: Network,
     title: "Terhubung",
-    copy: "Tanggap bekerja di atas sistem logistik yang sudah ada melalui API, tanpa menggantikan TMS atau ERP.",
+    copy: "TRACIA bekerja di atas sistem logistik yang sudah ada melalui API, tanpa menggantikan TMS atau ERP.",
   },
   {
     icon: Route,
     title: "Sigap",
-    copy: "Dari investigasi hingga eksekusi, Tanggap menyusun recovery plan secara terstruktur dan cepat.",
+    copy: "Dari investigasi hingga eksekusi, TRACIA menyusun recovery plan secara terstruktur dan cepat.",
   },
   {
     icon: ShieldCheck,
@@ -55,19 +55,19 @@ export default function AboutPage() {
             className="flex items-center gap-2 font-semibold text-foreground"
           >
             <Image
-              src="/TanggapAI-Logo.png"
-              alt="TanggapAI"
+              src="/TRACIA-logo.png"
+              alt="TRACIA"
               width={96}
               height={96}
               className="h-14 w-14 shrink-0 object-contain"
             />
-            TanggapAI
+            TRACIA
           </Link>
           <Link
             href="/agent"
             className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-primary/15 transition-colors hover:bg-primary-hover"
           >
-            Coba TanggapAI <ArrowRight className="h-4 w-4" />
+            Coba TRACIA <ArrowRight className="h-4 w-4" />
           </Link>
         </Reveal>
       </header>
@@ -90,11 +90,11 @@ export default function AboutPage() {
           <h1 className="mt-3 text-3xl font-semibold tracking-[-.03em] text-foreground sm:text-4xl">
             Masalah terjadi.{" "}
             <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">
-              Tanggap tangani.
+              TRACIA tangani.
             </span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl leading-7 text-muted">
-            TanggapAI adalah platform AI Agent untuk membantu operator logistik
+            TRACIA adalah platform AI Agent untuk membantu operator logistik
             menangani exception operasional — dari shipment yang terlambat
             hingga kendaraan yang bermasalah — melalui proses investigasi,
             perencanaan, eksekusi, dan verifikasi yang terstruktur.
@@ -106,14 +106,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-semibold tracking-[-.03em] text-foreground sm:text-3xl">
-              Siapa Tanggap?
+              Siapa TRACIA?
             </h2>
             <p className="mt-4 leading-7 text-muted">
-              Tanggap adalah AI Agent utama TanggapAI sekaligus maskot yang
-              merepresentasikan karakter sigap dan responsif. Tanggap bekerja di
-              atas sistem operasional yang sudah ada melalui API dan tools yang
-              diizinkan, dengan operator tetap memegang kendali atas tindakan
-              yang berisiko.
+              TRACIA adalah AI Agent sekaligus maskot yang merepresentasikan
+              karakter sigap dan responsif. TRACIA bekerja di atas sistem
+              operasional yang sudah ada melalui API dan tools yang diizinkan,
+              dengan operator tetap memegang kendali atas tindakan yang
+              berisiko.
             </p>
           </Reveal>
 
@@ -146,10 +146,10 @@ export default function AboutPage() {
               TIM KAMI
             </p>
             <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-foreground sm:text-3xl">
-              Tim di balik TanggapAI
+              Tim di balik TRACIA
             </h2>
             <p className="mt-4 leading-7 text-muted">
-              Tim kecil yang membangun Tanggap agar operator logistik punya AI
+              Tim kecil yang membangun TRACIA agar operator logistik punya AI
               Agent yang sigap menangani exception operasional.
             </p>
           </Reveal>
@@ -195,7 +195,7 @@ export default function AboutPage() {
               href="/agent"
               className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-primary-hover shadow-lg transition-colors hover:bg-primary-light"
             >
-              Coba TanggapAI <ArrowRight className="h-4 w-4" />
+              Coba TRACIA <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </Reveal>
@@ -203,7 +203,7 @@ export default function AboutPage() {
 
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto px-5 py-6 text-center text-xs text-muted sm:px-8">
-          © 2026 TanggapAI. AI Agent untuk Operasional Logistik.
+          © 2026 TRACIA. AI Agent untuk Operasional Logistik.
         </div>
       </footer>
     </main>

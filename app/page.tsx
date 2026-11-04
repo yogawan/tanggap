@@ -97,32 +97,32 @@ const recoverySteps = [
   {
     number: "01",
     title: "Investigate",
-    copy: "Tanggap memeriksa status shipment, kendaraan, driver, dan exception.",
+    copy: "TRACIA memeriksa status shipment, kendaraan, driver, dan exception.",
   },
   {
     number: "02",
     title: "Identify",
-    copy: "Tanggap menemukan bahwa kendaraan mengalami breakdown.",
+    copy: "TRACIA menemukan bahwa kendaraan mengalami breakdown.",
   },
   {
     number: "03",
     title: "Plan",
-    copy: "Tanggap mencari kendaraan dan driver pengganti yang memenuhi persyaratan.",
+    copy: "TRACIA mencari kendaraan dan driver pengganti yang memenuhi persyaratan.",
   },
   {
     number: "04",
     title: "Request Approval",
-    copy: "Tanggap meminta persetujuan sebelum melakukan tindakan yang memerlukannya.",
+    copy: "TRACIA meminta persetujuan sebelum melakukan tindakan yang memerlukannya.",
   },
   {
     number: "05",
     title: "Execute",
-    copy: "Tanggap menjalankan reassignment, memperbarui ETA, dan mengirim notifikasi melalui tools yang tersedia.",
+    copy: "TRACIA menjalankan reassignment, memperbarui ETA, dan mengirim notifikasi melalui tools yang tersedia.",
   },
   {
     number: "06",
     title: "Verify",
-    copy: "Tanggap memeriksa hasil tindakan dan melaporkan status aktual.",
+    copy: "TRACIA memeriksa hasil tindakan dan melaporkan status aktual.",
   },
 ];
 
@@ -143,7 +143,7 @@ const integrationSteps = [
   },
   {
     title: "Orchestrate",
-    copy: "Tanggap menentukan tools yang diperlukan berdasarkan objective dan konteks.",
+    copy: "TRACIA menentukan tools yang diperlukan berdasarkan objective dan konteks.",
   },
   {
     title: "Act",
@@ -154,7 +154,7 @@ const integrationSteps = [
 const safetyPoints = [
   {
     title: "Restricted Tools",
-    copy: "Tanggap hanya dapat menggunakan tools yang diizinkan.",
+    copy: "TRACIA hanya dapat menggunakan tools yang diizinkan.",
   },
   {
     title: "Human Approval",
@@ -162,30 +162,30 @@ const safetyPoints = [
   },
   {
     title: "Verified Results",
-    copy: "Tanggap memeriksa respons sistem sebelum menyatakan tugas selesai.",
+    copy: "TRACIA memeriksa respons sistem sebelum menyatakan tugas selesai.",
   },
 ];
 
 const faqs = [
   {
-    q: "Apa itu TanggapAI?",
-    a: "TanggapAI adalah platform AI Agent untuk membantu menangani exception operasional logistik.",
+    q: "Apa itu TRACIA?",
+    a: "TRACIA adalah platform AI Agent untuk membantu menangani exception operasional logistik.",
   },
   {
-    q: "Siapa Tanggap?",
-    a: "Tanggap adalah AI Agent utama TanggapAI sekaligus maskot yang merepresentasikan karakter sigap dan responsif.",
+    q: "Siapa TRACIA?",
+    a: "TRACIA adalah AI Agent sekaligus maskot yang merepresentasikan karakter sigap dan responsif.",
   },
   {
-    q: "Apakah Tanggap menggantikan TMS atau ERP?",
-    a: "Tidak. Tanggap bekerja di atas sistem yang sudah ada melalui API dan tools yang tersedia.",
+    q: "Apakah TRACIA menggantikan TMS atau ERP?",
+    a: "Tidak. TRACIA bekerja di atas sistem yang sudah ada melalui API dan tools yang tersedia.",
   },
   {
-    q: "Apakah Tanggap bisa bertindak otomatis?",
-    a: "Tanggap dapat menjalankan tindakan yang diizinkan. Tindakan tertentu memerlukan persetujuan operator.",
+    q: "Apakah TRACIA bisa bertindak otomatis?",
+    a: "TRACIA dapat menjalankan tindakan yang diizinkan. Tindakan tertentu memerlukan persetujuan operator.",
   },
   {
-    q: "Bagaimana Tanggap mengetahui tindakan berhasil?",
-    a: "Tanggap memeriksa hasil tool dan status aktual dari sistem sebelum melaporkan penyelesaian.",
+    q: "Bagaimana TRACIA mengetahui tindakan berhasil?",
+    a: "TRACIA memeriksa hasil tool dan status aktual dari sistem sebelum melaporkan penyelesaian.",
   },
   {
     q: "Apakah integrasi logistik sudah tersedia?",
@@ -227,8 +227,8 @@ function WaletMascot({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   const pixelSizes = { sm: 44, md: 112, lg: 176 };
   return (
     <Image
-      src="/Tanggap.png"
-      alt="Tanggap"
+      src="/TRACIA.png"
+      alt="TRACIA"
       width={pixelSizes[size]}
       height={pixelSizes[size]}
       className={`shrink-0 object-contain ${sizeClasses[size]}`}
@@ -239,8 +239,8 @@ function WaletMascot({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
 function Logo({ className = "h-14 w-14" }: { className?: string }) {
   return (
     <Image
-      src="/TanggapAI-Logo.png"
-      alt="TanggapAI"
+      src="/TRACIA-logo.png"
+      alt="TRACIA"
       width={96}
       height={96}
       className={`shrink-0 object-contain ${className}`}
@@ -287,7 +287,7 @@ function Navbar() {
           className="flex items-center gap-2 font-semibold text-foreground"
         >
           <Logo />
-          TanggapAI
+          TRACIA
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
           {navLinks.map((link) =>
@@ -311,7 +311,7 @@ function Navbar() {
           )}
         </nav>
         <LinkButton href="/agent">
-          Coba TanggapAI <ArrowRight className="h-4 w-4" />
+          Coba TRACIA <ArrowRight className="h-4 w-4" />
         </LinkButton>
       </Reveal>
     </header>
@@ -339,7 +339,7 @@ function Hero() {
             <WaletMascot size="md" />
           </div>
           <p className="mt-2 text-xl font-medium text-muted sm:text-2xl">
-            {greeting}, aku Tanggap
+            {greeting}, aku TRACIA
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-[-.02em] text-foreground sm:text-4xl">
             Ada yang ingin kamu{" "}
@@ -474,11 +474,11 @@ function Solution() {
             THE SOLUTION
           </p>
           <h2 className="text-3xl font-semibold tracking-[-.03em] sm:text-4xl">
-            TanggapAI menghubungkan data dengan tindakan.
+            TRACIA menghubungkan data dengan tindakan.
           </h2>
           <p className="mt-5 leading-7 text-primary-light/80">
-            TanggapAI menempatkan Tanggap sebagai AI Agent yang bekerja di atas
-            sistem logistik melalui API untuk membantu menyelesaikan exception
+            TRACIA bekerja sebagai AI Agent yang beroperasi di atas sistem
+            logistik melalui API untuk membantu menyelesaikan exception
             operasional.
           </p>
         </Reveal>
@@ -489,7 +489,7 @@ function Solution() {
         >
           <Image
             src="/workflow.png"
-            alt="Workflow: TMS, ERP, Fleet, dan Tracking mengalir ke TanggapAI Platform, diproses oleh Tanggap AI Agent melalui tahap Investigate-Reason-Plan-Execute-Verify, menghasilkan Operational Actions seperti Reassign Shipment, Update ETA, dan Notify Customer."
+            alt="Workflow: TMS, ERP, Fleet, dan Tracking mengalir ke TRACIA Platform, diproses oleh TRACIA AI Agent melalui tahap Investigate-Reason-Plan-Execute-Verify, menghasilkan Operational Actions seperti Reassign Shipment, Update ETA, dan Notify Customer."
             width={520}
             height={397}
             className="mx-auto h-auto w-full max-w-[480px] rounded-2xl"
@@ -537,8 +537,8 @@ function Capabilities() {
         <Reveal>
           <SectionIntro
             eyebrow="MEET YOUR AI AGENT"
-            title="Tanggap tidak hanya menjawab. Tanggap membantu menyelesaikan."
-            copy="Lima tahap kerja Tanggap mengubah exception menjadi proses penyelesaian yang terstruktur."
+            title="TRACIA tidak hanya menjawab. TRACIA membantu menyelesaikan."
+            copy="Lima tahap kerja TRACIA mengubah exception menjadi proses penyelesaian yang terstruktur."
           />
         </Reveal>
         <Reveal
@@ -585,9 +585,9 @@ function HowItWorks() {
       <Reveal>
         <SectionIntro
           centered
-          eyebrow="SEE TANGGAP IN ACTION"
+          eyebrow="SEE TRACIA IN ACTION"
           title="Satu instruksi. Workflow recovery yang terkoordinasi."
-          copy="Tanggap membantu operator menangani shipment yang mengalami gangguan melalui investigasi hingga verifikasi."
+          copy="TRACIA membantu operator menangani shipment yang mengalami gangguan melalui investigasi hingga verifikasi."
         />
       </Reveal>
 
@@ -639,8 +639,8 @@ function ExecutionTrace() {
       <Reveal>
         <SectionIntro
           eyebrow="TRANSPARENT EXECUTION"
-          title="Setiap tindakan Tanggap memiliki jejak."
-          copy="Pantau bagaimana Tanggap memanggil tools, menerima respons sistem, dan memverifikasi hasil."
+          title="Setiap tindakan TRACIA memiliki jejak."
+          copy="Pantau bagaimana TRACIA memanggil tools, menerima respons sistem, dan memverifikasi hasil."
         />
       </Reveal>
 
@@ -698,12 +698,11 @@ function Integration() {
             BUILT AROUND YOUR EXISTING SYSTEMS
           </p>
           <h2 className="text-3xl font-semibold tracking-[-.03em] sm:text-4xl">
-            Pertahankan sistemmu. Tambahkan kemampuan Tanggap.
+            Pertahankan sistemmu. Tambahkan kemampuan TRACIA.
           </h2>
           <p className="mt-5 leading-7 text-primary-light/80">
-            TanggapAI dirancang untuk menghubungkan AI Agent dengan sistem
-            logistik melalui API tanpa harus mengganti sistem operasional yang
-            sudah ada.
+            TRACIA dirancang untuk menghubungkan AI Agent dengan sistem logistik
+            melalui API tanpa harus mengganti sistem operasional yang sudah ada.
           </p>
         </Reveal>
 
@@ -764,10 +763,10 @@ function Safety() {
             CONTROLLED AUTONOMY
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-[-.03em] text-foreground sm:text-4xl">
-            Tanggap sigap bertindak. Operator tetap memegang kendali.
+            TRACIA sigap bertindak. Operator tetap memegang kendali.
           </h2>
           <p className="mt-5 leading-7 text-muted">
-            TanggapAI menggabungkan otomatisasi dengan kontrol manusia untuk
+            TRACIA menggabungkan otomatisasi dengan kontrol manusia untuk
             menjaga tindakan tetap sesuai aturan operasional.
           </p>
           <p className="mt-6 border-l-2 border-primary pl-4 text-sm font-medium italic text-foreground">
@@ -812,7 +811,7 @@ function Faq() {
           centered
           eyebrow="FAQ"
           title="Pertanyaan yang sering diajukan"
-          copy="Hal-hal dasar seputar TanggapAI dan Tanggap."
+          copy="Hal-hal dasar seputar TRACIA."
         />
       </Reveal>
       <Reveal
@@ -849,12 +848,12 @@ function FinalCta() {
           Jangan biarkan exception berhenti di dashboard.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl leading-7 text-primary-light/80">
-          Ceritakan masalah operasionalmu kepada Tanggap. Mulai investigasi,
-          temukan langkah recovery, dan verifikasi hasilnya melalui TanggapAI.
+          Ceritakan masalah operasionalmu kepada TRACIA. Mulai investigasi,
+          temukan langkah recovery, dan verifikasi hasilnya melalui TRACIA.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <LinkButton href="/agent" variant="light">
-            Coba TanggapAI <ArrowRight className="h-4 w-4" />
+            Coba TRACIA <ArrowRight className="h-4 w-4" />
           </LinkButton>
           <a
             href="#cara-kerja"
@@ -875,10 +874,10 @@ function Footer() {
         <div>
           <div className="flex items-center gap-2 font-semibold text-foreground">
             <Logo />
-            TanggapAI
+            TRACIA
           </div>
           <p className="mt-3 text-sm font-medium text-primary">
-            &quot;Masalah terjadi. Tanggap tangani.&quot;
+            &quot;Masalah terjadi. TRACIA tangani.&quot;
           </p>
           <p className="mt-2 max-w-sm text-sm leading-6 text-muted">
             Platform AI Agent untuk membantu penanganan exception dalam
@@ -891,7 +890,7 @@ function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted">
             <li>
               <a href="#platform" className="hover:text-foreground">
-                Kemampuan Tanggap
+                Kemampuan TRACIA
               </a>
             </li>
             <li>
@@ -931,7 +930,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-border px-5 py-6 text-center text-xs text-muted sm:px-8">
-        © 2026 TanggapAI. AI Agent untuk Operasional Logistik.
+        © 2026 TRACIA. AI Agent untuk Operasional Logistik.
       </div>
     </footer>
   );

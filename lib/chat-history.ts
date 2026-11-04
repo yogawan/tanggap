@@ -1,4 +1,4 @@
-// The five stages of TanggapAI's resolution workflow — see the "Capabilities"
+// The five stages of TRACIA's resolution workflow — see the "Capabilities"
 // section on the landing page. Agent messages can tag which stage(s) of that
 // workflow they cover so the chat UI can show matching labels.
 export type AgentStage =
@@ -39,7 +39,7 @@ export type StoredChat = {
   messages: ChatMessage[];
 };
 
-const STORAGE_KEY = "tanggapai.chat-history";
+const STORAGE_KEY = "tracia.chat-history";
 const TITLE_MAX_LENGTH = 60;
 
 function readAll(): StoredChat[] {

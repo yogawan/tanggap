@@ -59,8 +59,8 @@ export function DataSourceSwitcher() {
         <p className="text-sm leading-6 text-muted">
           Integrasi{" "}
           <span className="font-semibold text-foreground">{pendingLabel}</span>{" "}
-          masih dalam tahap pengembangan. Untuk saat ini, TanggapAI hanya
-          tersedia untuk sumber data{" "}
+          masih dalam tahap pengembangan. Untuk saat ini, TRACIA hanya tersedia
+          untuk sumber data{" "}
           <span className="font-semibold text-foreground">Tracking</span>.
         </p>
         <Button className="mt-5 w-full" onClick={() => setPendingLabel(null)}>

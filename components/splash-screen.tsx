@@ -31,8 +31,8 @@ export function SplashScreen() {
       }`}
     >
       <Image
-        src="/TanggapAI-Logo.png"
-        alt="TanggapAI"
+        src="/TRACIA-logo.png"
+        alt="TRACIA"
         width={256}
         height={256}
         priority

@@ -262,13 +262,13 @@ function AgentWorkspace() {
         <div className="flex h-full w-72 flex-col lg:w-64">
           <div className="flex items-center gap-2 border-b border-border p-4 font-semibold text-foreground">
             <Image
-              src="/TanggapAI-Logo.png"
-              alt="TanggapAI"
+              src="/TRACIA-logo.png"
+              alt="TRACIA"
               width={48}
               height={48}
               className="h-12 w-12 shrink-0 object-contain"
             />
-            TanggapAI
+            TRACIA
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
@@ -357,13 +357,13 @@ function AgentWorkspace() {
             <Menu className="h-5 w-5" />
           </button>
           <Image
-            src="/TanggapAI-Logo.png"
-            alt="TanggapAI"
+            src="/TRACIA-logo.png"
+            alt="TRACIA"
             width={28}
             height={28}
             className="h-7 w-7 shrink-0 object-contain"
           />
-          <span className="font-semibold text-foreground">TanggapAI</span>
+          <span className="font-semibold text-foreground">TRACIA</span>
         </div>
         {!activeChat || activeChat.messages.length === 0 ? (
           <>
@@ -377,15 +377,15 @@ function AgentWorkspace() {
               >
                 <div className="flex justify-center">
                   <Image
-                    src="/Tanggap.png"
-                    alt="Tanggap"
+                    src="/TRACIA.png"
+                    alt="TRACIA"
                     width={112}
                     height={112}
                     className="h-20 w-20 object-contain sm:h-28 sm:w-28"
                   />
                 </div>
                 <p className="mt-2 text-lg font-medium text-muted sm:text-2xl">
-                  {greeting}, aku Tanggap
+                  {greeting}, aku TRACIA
                 </p>
                 <h1 className="mt-1 text-2xl font-semibold tracking-[-.02em] text-foreground sm:text-4xl">
                   Ada yang ingin kamu{" "}
@@ -457,7 +457,7 @@ function AgentWorkspace() {
           <>
             {isDummyChat && (
               <div className="border-b border-primary-light bg-primary-light/30 px-4 py-3 text-xs font-medium text-primary sm:px-6">
-                Contoh skenario — menunjukkan bagaimana TanggapAI menyelesaikan
+                Contoh skenario — menunjukkan bagaimana TRACIA menyelesaikan
                 kasus ini secara end-to-end.
               </div>
             )}
@@ -483,14 +483,14 @@ function AgentWorkspace() {
                   className="flex items-start justify-start gap-2"
                 >
                   <Image
-                    src="/Tanggap.png"
-                    alt="Tanggap"
+                    src="/TRACIA.png"
+                    alt="TRACIA"
                     width={64}
                     height={64}
                     className="h-10 w-10 shrink-0 object-contain sm:h-16 sm:w-16"
                   />
                   <div className="rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3 text-sm text-muted">
-                    Tanggap sedang bekerja…
+                    TRACIA sedang bekerja…
                   </div>
                 </Reveal>
               )}
@@ -584,8 +584,8 @@ function MessageBubble({
       className="flex items-start justify-start gap-2"
     >
       <Image
-        src="/Tanggap.png"
-        alt="Tanggap"
+        src="/TRACIA.png"
+        alt="TRACIA"
         width={64}
         height={64}
         className="h-10 w-10 shrink-0 object-contain sm:h-16 sm:w-16"

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TanggapAI - Logistics Exception Resolve",
+  title: "TRACIA - Logistics Exception Resolve",
   description: "AI agent for resolving logistics exceptions end-to-end.",
 };
 

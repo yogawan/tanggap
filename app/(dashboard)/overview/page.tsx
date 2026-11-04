@@ -158,8 +158,8 @@ export default async function OverviewPage() {
         {grouped.length === 0 ? (
           <Reveal className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-surface py-14 text-center">
             <Image
-              src="/Tanggap.png"
-              alt="Tanggap"
+              src="/TRACIA.png"
+              alt="TRACIA"
               width={64}
               height={64}
               className="h-14 w-14 object-contain"

@@ -1,5 +1,5 @@
 {
-  "name": "tanggap-ai",
+  "name": "tracia",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,19 @@
     "lint": "biome check",
     "format": "biome format --write",
     "seed": "tsx --env-file=.env.local scripts/seed.ts",
-    "clean": "rm -rf node_modules .next"
+    "clean": "rm -rf node_modules .next",
+    "remotion:studio": "remotion studio remotion/index.ts",
+    "remotion:render": "remotion render remotion/index.ts TRACIA-Demo out/tracia-demo.mp4",
+    "remotion:render:pitch": "remotion render remotion/index.ts TRACIA-Pitch out/tracia-pitch.mp4",
+    "voiceover:generate": "tsx --env-file=.env.local scripts/generate-voiceover.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@remotion/google-fonts": "4.0.540",
+    "@remotion/media": "4.0.540",
+    "@remotion/media-utils": "4.0.540",
+    "@remotion/player": "4.0.540",
+    "@remotion/transitions": "4.0.540",
     "gsap": "^3.15.0",
     "lucide": "^1.55.0",
     "lucide-react": "^1.55.0",
@@ -21,11 +30,14 @@
     "openai": "^7.26.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "remotion": "4.0.540",
     "tw-animate-css": "^1.4.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
+    "@remotion/cli": "4.0.540",
+    "@remotion/tailwind-v4": "^4.0.540",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
